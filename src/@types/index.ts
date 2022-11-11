@@ -27,6 +27,7 @@ export const ProxyGenerationPlansConstant = {
   BRIGHTDATA: 'BRIGHTDATA',
   OXYLABS: 'OXYLABS',
   SMART: 'SMART',
+  IPROYAL: 'IPROYAL',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
