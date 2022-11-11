@@ -11,7 +11,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "format": "prettier --write \"src/**/*.ts\"",
-    "version": "npm run format && git add -A src"
+    "version": "npm run format && git add -A src",
+    "test": "jest --config jest.config.js"
   },
   "files": [
     "lib/**/*"
@@ -29,5 +30,10 @@
   "postversion": "git push && git push --tags",
   "description": "Proxy utility functions",
   "main": "lib/index.js",
-  "types": "lib"
+  "types": "lib",
+  "dependencies": {
+    "@types/jest": "^29.2.2",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3"
+  }
 }
