@@ -20,3 +20,13 @@ export const ProxyGenerationTypesConstant = {
 } as const;
 
 export type ProxyGenerationTypes = typeof ProxyGenerationTypesConstant[keyof typeof ProxyGenerationTypesConstant];
+
+export const ProxyGenerationPlansConstant = {
+  PACKETSTREAM: 'PACKETSTREAM',
+  PRIVATE: 'PRIVATE',
+  BRIGHTDATA: 'BRIGHTDATA',
+  OXYLABS: 'OXYLABS',
+  SMART: 'SMART',
+} as const;
+
+export type ProxyGenerationPlans = typeof ProxyGenerationTypesConstant[keyof typeof ProxyGenerationTypesConstant];

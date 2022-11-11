@@ -12,7 +12,8 @@
     "watch": "tsc -w",
     "format": "prettier --write \"src/**/*.ts\"",
     "version": "npm run format && git add -A src",
-    "test": "jest --config jest.config.js"
+    "test": "jest --config jest.config.js",
+    "test:verbose": "jest --config jest.config.js --verbose"
   },
   "files": [
     "lib/**/*"
