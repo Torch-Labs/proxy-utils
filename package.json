@@ -15,7 +15,8 @@
     "version": "npm run format && git add -A src",
     "test": "jest --config jest.config.js",
     "test:verbose": "jest --config jest.config.js --verbose",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "lint": "tslint -p tsconfig.json"
   },
   "files": [
     "lib/**/*",

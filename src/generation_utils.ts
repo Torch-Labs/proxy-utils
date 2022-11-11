@@ -28,7 +28,7 @@ export const generateProxies = (
     throw new Error('Invalid proxy generation type');
   }
   const remainder = amount % config.countryList.length;
-  const proxyAmount = ~~(amount / config.countryList.length);
+  const proxyAmount = Math.floor(amount / config.countryList.length);
 
   const generatedProxyList = [];
 
@@ -36,7 +36,7 @@ export const generateProxies = (
     config.countryList.forEach((country) => {
       const proxy = generateProxyForType(
         {
-          country: country,
+          country,
           domain: config.domain,
           host: config.host,
           password: config.password,

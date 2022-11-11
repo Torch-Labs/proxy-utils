@@ -1,7 +1,6 @@
 import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from '..';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
-  console.log(proxy);
   const splitResult = proxy.split(':');
 
   expect(splitResult[0]).toEqual(expected[0]);
