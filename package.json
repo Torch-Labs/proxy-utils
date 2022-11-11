@@ -9,13 +9,15 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "version": "npm run format && git add -A src"
   },
   "files": [
     "lib/**/*"
   ],
   "prepare": "npm run build",
-  "version": "npm run format && git add -A src",
+  "version": "1.0.0",
   "postversion": "git push && git push --tags",
   "description": "Proxy utility functions",
   "main": "lib/index.js",
