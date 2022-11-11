@@ -78,8 +78,35 @@ describe('Proxy Generation', () => {
   });
 
   describe('Private', () => {
-    it.todo('Should generate rotating proxies for private with 1 country');
-    it.todo('Should generate sticky proxies for private with 1 country');
+    const config = {
+      countryList: ['US'],
+      domain: 'killerproxies.com',
+      password: 'testpw',
+      host: 'testhost',
+    };
+    it('Should generate rotating proxies for private with 1 country', () => {
+      const result = generateProxiesForPlan(
+        config,
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PRIVATE,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.killerproxies.com:5500:country-us:testpw');
+      });
+    });
+    it('Should generate sticky proxies for private with 1 country', () => {
+      const result = generateProxiesForPlan(
+        config,
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.PRIVATE,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.killerproxies.com:5500:country-us-session-.{32}:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
     it.todo('Should generate rotating proxies for private with multiple countries');
     it.todo('Should generate sticky proxies for private with multiple countries');
     it.todo('Should generate rotating proxies for private with special pool countries');
