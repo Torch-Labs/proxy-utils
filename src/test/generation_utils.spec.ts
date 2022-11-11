@@ -23,11 +23,10 @@ describe('Proxy Generation Utils', () => {
         domain: 'domain',
         port: 1234,
       };
-      const result = generateProxyForType(
-        input,
-        ProxyGenerationTypesConstant.STICKY,
-        generatePacketstreamStickyProxies,
-      );
+      const result = generateProxyForType(input, ProxyGenerationTypesConstant.STICKY, {
+        rotatingGenerationFn: generatePacketstreamRotatingProxies,
+        stickyGenerationFn: generatePacketstreamStickyProxies,
+      });
 
       expectStickyProxy(result, ['host.domain', '1234', 'username', 'password_country-country_session-']);
     });
@@ -42,11 +41,10 @@ describe('Proxy Generation Utils', () => {
         port: 1234,
       };
       const expected = 'host.domain:1234:username:password_country-country';
-      const result = generateProxyForType(
-        input,
-        ProxyGenerationTypesConstant.ROTATING,
-        generatePacketstreamRotatingProxies,
-      );
+      const result = generateProxyForType(input, ProxyGenerationTypesConstant.ROTATING, {
+        rotatingGenerationFn: generatePacketstreamRotatingProxies,
+        stickyGenerationFn: generatePacketstreamStickyProxies,
+      });
 
       expect(result).toEqual(expected);
     });
@@ -67,12 +65,10 @@ describe('Proxy Generation Utils', () => {
         'host.domain:1234:username:password_country-country',
         'host.domain:1234:username:password_country-country',
       ];
-      const result = generateProxies(
-        input,
-        3,
-        ProxyGenerationTypesConstant.ROTATING,
-        generatePacketstreamRotatingProxies,
-      );
+      const result = generateProxies(input, 3, ProxyGenerationTypesConstant.ROTATING, {
+        rotatingGenerationFn: generatePacketstreamRotatingProxies,
+        stickyGenerationFn: generatePacketstreamStickyProxies,
+      });
 
       expect(result).toEqual(expected);
     });
@@ -94,12 +90,10 @@ describe('Proxy Generation Utils', () => {
         'host.domain:1234:username:password_country-country2',
         'host.domain:1234:username:password_country-country3',
       ];
-      const result = generateProxies(
-        input,
-        6,
-        ProxyGenerationTypesConstant.ROTATING,
-        generatePacketstreamRotatingProxies,
-      );
+      const result = generateProxies(input, 6, ProxyGenerationTypesConstant.ROTATING, {
+        rotatingGenerationFn: generatePacketstreamRotatingProxies,
+        stickyGenerationFn: generatePacketstreamStickyProxies,
+      });
 
       expect(result).toEqual(expected);
     });
@@ -122,12 +116,10 @@ describe('Proxy Generation Utils', () => {
         'host.domain:1234:username:password_country-country3',
         'host.domain:1234:username:password_country-country1',
       ];
-      const result = generateProxies(
-        input,
-        7,
-        ProxyGenerationTypesConstant.ROTATING,
-        generatePacketstreamRotatingProxies,
-      );
+      const result = generateProxies(input, 7, ProxyGenerationTypesConstant.ROTATING, {
+        rotatingGenerationFn: generatePacketstreamRotatingProxies,
+        stickyGenerationFn: generatePacketstreamStickyProxies,
+      });
 
       expect(result).toEqual(expected);
     });

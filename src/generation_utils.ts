@@ -2,22 +2,27 @@ import { ProxyConfig, ProxyGenerationConfig, ProxyGenerationTypes, ProxyGenerati
 
 type ProxyGenerationFunction = (input: ProxyConfig) => string;
 
+type ProxyGenerationFunctions = {
+  stickyGenerationFn: ProxyGenerationFunction;
+  rotatingGenerationFn: ProxyGenerationFunction;
+};
+
 export const generateProxyForType = (
   config: ProxyConfig,
   type: ProxyGenerationTypes,
-  generationFn: ProxyGenerationFunction,
+  generationFns: ProxyGenerationFunctions,
 ) => {
   if (type === ProxyGenerationTypesConstant.STICKY) {
-    return generationFn(config);
+    return generationFns.stickyGenerationFn(config);
   }
-  return generationFn(config);
+  return generationFns.rotatingGenerationFn(config);
 };
 
 export const generateProxies = (
   config: ProxyGenerationConfig,
   amount: number,
   type: ProxyGenerationTypes,
-  generationFn: ProxyGenerationFunction,
+  generationFns: ProxyGenerationFunctions,
 ) => {
   if (!ProxyGenerationTypesConstant[type]) {
     throw new Error('Invalid proxy generation type');
@@ -39,7 +44,7 @@ export const generateProxies = (
           username: config.username,
         },
         type,
-        generationFn,
+        generationFns,
       );
       generatedProxyList.push(proxy);
     });
@@ -57,7 +62,7 @@ export const generateProxies = (
           username: config.username,
         },
         type,
-        generationFn,
+        generationFns,
       );
       generatedProxyList.push(proxy);
     }

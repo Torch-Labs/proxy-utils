@@ -1,9 +1,9 @@
 export type DefualtProxyConfig = {
   host: string;
-  username: string;
+  username?: string;
   password: string;
   domain: string;
-  port: number;
+  port?: number;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {
@@ -29,4 +29,4 @@ export const ProxyGenerationPlansConstant = {
   SMART: 'SMART',
 } as const;
 
-export type ProxyGenerationPlans = typeof ProxyGenerationTypesConstant[keyof typeof ProxyGenerationTypesConstant];
+export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];

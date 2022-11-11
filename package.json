@@ -1,5 +1,6 @@
 {
   "name": "@torchlabs/proxy-utils",
+  "version": "0.0.4",
   "license": "MIT",
   "devDependencies": {
     "prettier": "^2.7.1",
@@ -13,10 +14,12 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "version": "npm run format && git add -A src",
     "test": "jest --config jest.config.js",
-    "test:verbose": "jest --config jest.config.js --verbose"
+    "test:verbose": "jest --config jest.config.js --verbose",
+    "publish": "npm publish --access public"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "src/**/*"
   ],
   "repository": {
     "type": "git",
@@ -27,12 +30,12 @@
   },
   "homepage": "https://github.com/Torch-Labs/proxy-utils#readme",
   "prepare": "npm run build",
-  "version": "1.0.0",
   "postversion": "git push && git push --tags",
   "description": "Proxy utility functions",
   "main": "lib/index.js",
   "types": "lib",
   "dependencies": {
+    "@torchlabs/proxy-utils": "^0.0.4",
     "@types/jest": "^29.2.2",
     "jest": "^29.3.1",
     "ts-jest": "^29.0.3"
