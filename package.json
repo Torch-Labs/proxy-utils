@@ -1,5 +1,5 @@
 {
-  "name": "torchlabs-proxy-utils",
+  "name": "@torchlabs/proxy-utils",
   "license": "MIT",
   "devDependencies": {
     "prettier": "^2.7.1",
@@ -16,10 +16,18 @@
   "files": [
     "lib/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Torch-Labs/proxy-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Torch-Labs/proxy-utils/issues"
+  },
+  "homepage": "https://github.com/Torch-Labs/proxy-utils#readme",
   "prepare": "npm run build",
   "version": "1.0.0",
   "postversion": "git push && git push --tags",
   "description": "Proxy utility functions",
   "main": "lib/index.js",
-  "types": "lib/index.d.ts"
+  "types": "lib"
 }
