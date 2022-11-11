@@ -13,7 +13,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "version": "npm run format && git add -A src",
     "test": "jest --config jest.config.json",
-    "test:verbose": "jest --config jest.config.json --verbose",
+    "test:verbose": "jest --config jest.config.json --verbose --coverage",
     "publish": "npm publish --access public",
     "lint": "eslint . --ext .ts"
   },
