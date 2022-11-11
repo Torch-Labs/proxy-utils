@@ -1,5 +1,5 @@
-import { ProxyConfig } from '../@types';
-import { randomString } from '../utils';
+import { ProxyConfig } from '../../@types';
+import { randomString } from '../../utils';
 
 const DEFAULT_IPROYAL_PORT = '12323';
 

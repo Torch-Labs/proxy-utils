@@ -4,13 +4,13 @@ import {
   ProxyGenerationTypes,
   ProxyGenerationPlansConstant,
 } from './@types';
-import { generateBrightdataRotatingProxies, generateBrightdataStickyProxies } from './brightdata';
 import { generateProxies } from './generation_utils';
-import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from './iproyal';
-import { generateOxylabsRotatingProxies, generateOxylabsStickyProxies } from './oxylabs';
-import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from './packetstream';
-import { generatePrivateRotatingProxies, generatePrivateStickyProxies } from './private-plan';
-import { generateSmartRotatingProxies, generateSmartStickyProxies } from './smart';
+import { generateBrightdataRotatingProxies, generateBrightdataStickyProxies } from './plans/brightdata';
+import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from './plans/iproyal';
+import { generateOxylabsRotatingProxies, generateOxylabsStickyProxies } from './plans/oxylabs';
+import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from './plans/packetstream';
+import { generatePrivateRotatingProxies, generatePrivateStickyProxies } from './plans/private-plan';
+import { generateSmartRotatingProxies, generateSmartStickyProxies } from './plans/smart';
 
 export const generateProxiesForPlan = (
   config: ProxyGenerationConfig,

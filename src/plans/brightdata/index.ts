@@ -1,5 +1,5 @@
-import { ProxyConfig } from '../@types';
-import { randomString } from '../utils';
+import { ProxyConfig } from '../../@types';
+import { randomString } from '../../utils';
 
 export const generateBrightdataStickyProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username } = input;

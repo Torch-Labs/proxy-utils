@@ -1,6 +1,6 @@
 import { ProxyGenerationTypesConstant } from '../@types';
 import { generateProxies, generateProxyForType } from '../generation_utils';
-import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from '../packetstream';
+import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from '../plans/packetstream';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
