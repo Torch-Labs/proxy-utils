@@ -23,6 +23,10 @@ jobs:
           name: Lint
           command: npm run lint
 
+      - run:
+          name: Test
+          command: npm run test:verbose
+
 workflows:
   build-test-publish:
     jobs:
