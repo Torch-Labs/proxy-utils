@@ -22,6 +22,7 @@ describe('Proxy Generation', () => {
         expect(proxy).toEqual('testhost.killerproxies.com:1234:testuser:testpw_country-US');
       });
     });
+
     it('Should generate sticky proxies for packetstream with 1 country', () => {
       const result = generateProxiesForPlan(
         config,
@@ -34,6 +35,7 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
+
     it('Should generate rotating proxies for packetstream with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -58,6 +60,7 @@ describe('Proxy Generation', () => {
         'testhost.killerproxies.com:1234:testuser:testpw_country-Canada',
       ]);
     });
+
     it('Should generate sticky proxies for packetstream with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -73,8 +76,6 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
-    it.todo('Should generate rotating proxies for packetstream with special pool countries');
-    it.todo('Should generate sticky proxies for packetstream with special pool countries');
   });
 
   describe('Private', () => {
@@ -95,6 +96,7 @@ describe('Proxy Generation', () => {
         expect(proxy).toEqual('testhost.killerproxies.com:5500:country-us:testpw');
       });
     });
+
     it('Should generate sticky proxies for private with 1 country', () => {
       const result = generateProxiesForPlan(
         config,
@@ -107,6 +109,7 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
+
     it('Should generate rotating proxies for private with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -131,6 +134,7 @@ describe('Proxy Generation', () => {
         'testhost.killerproxies.com:5500:country-ca:testpw',
       ]);
     });
+
     it('Should generate sticky proxies for private with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -146,8 +150,6 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
-    it.todo('Should generate rotating proxies for private with special pool countries');
-    it.todo('Should generate sticky proxies for private with special pool countries');
   });
 
   describe('Oxylabs', () => {
@@ -169,6 +171,7 @@ describe('Proxy Generation', () => {
         expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw');
       });
     });
+
     it('Should generate sticky proxies for oxylabs with 1 country', () => {
       const result = generateProxiesForPlan(
         {
@@ -188,6 +191,7 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
+
     it('Should generate rotating proxies for oxylabs with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -216,6 +220,7 @@ describe('Proxy Generation', () => {
         'testhost.oxylabs.io:1234:customer-testuser-cc-ca:testpw',
       ]);
     });
+
     it('Should generate sticky proxies for oxylabs with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -235,8 +240,6 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
-    it.todo('Should generate rotating proxies for oxylabs with special pool countries');
-    it.todo('Should generate sticky proxies for oxylabs with special pool countries');
   });
 
   describe('Smart', () => {
@@ -258,6 +261,7 @@ describe('Proxy Generation', () => {
         expect(proxy).toEqual('testhost.smartproxy.com:1234:user-testuser-country-us:testpw');
       });
     });
+
     it('Should generate sticky proxies for smart with 1 country', () => {
       const result = generateProxiesForPlan(
         {
@@ -278,6 +282,7 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
+
     it('Should generate rotating proxies for smart with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -306,6 +311,7 @@ describe('Proxy Generation', () => {
         'testhost.smartproxy.com:1234:user-testuser-country-ca:testpw',
       ]);
     });
+
     it('Should generate sticky proxies for smart with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -325,25 +331,194 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
-    it.todo('Should generate rotating proxies for smart with special pool countries');
-    it.todo('Should generate sticky proxies for smart with special pool countries');
   });
 
   describe('Brightdata', () => {
-    it.todo('Should generate rotating proxies for brightdata with 1 country');
-    it.todo('Should generate sticky proxies for brightdata with 1 country');
-    it.todo('Should generate rotating proxies for brightdata with multiple countries');
-    it.todo('Should generate sticky proxies for brightdata with multiple countries');
-    it.todo('Should generate rotating proxies for brightdata with special pool countries');
-    it.todo('Should generate sticky proxies for brightdata with special pool countries');
+    it('Should generate rotating proxies for brightdata with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'brightdata.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: '1234567f62657475786b3863713740746f7263686c6162732e78797a',
+          port: 24046,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.BRIGHTDATA,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual(
+          'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+        );
+      });
+    });
+
+    it('Should generate sticky proxies for brightdata with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'brightdata.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: '1234567f62657475786b3863713740746f7263686c6162732e78797a',
+          port: 24046,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.BRIGHTDATA,
+      );
+
+      result.forEach((proxy) => {
+        const re =
+          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us-session-.{15}:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for brightdata with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us', 'ca', 'mx'],
+          domain: 'brightdata.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: '1234567f62657475786b3863713740746f7263686c6162732e78797a',
+          port: 24046,
+        },
+        11,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.BRIGHTDATA,
+      );
+
+      expect(result).toEqual([
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
+      ]);
+    });
+
+    it('Should generate sticky proxies for brightdata with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us', 'ca', 'mx'],
+          domain: 'brightdata.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: '1234567f62657475786b3863713740746f7263686c6162732e78797a',
+          port: 24046,
+        },
+        11,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.BRIGHTDATA,
+      );
+
+      result.forEach((proxy) => {
+        const re =
+          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-(us|ca|mx)-session-.{15}:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
   });
 
   describe('IPRoyal', () => {
-    it.todo('Should generate rotating proxies for iproyal with 1 country');
-    it.todo('Should generate sticky proxies for iproyal with 1 country');
-    it.todo('Should generate rotating proxies for iproyal with multiple countries');
-    it.todo('Should generate sticky proxies for iproyal with multiple countries');
-    it.todo('Should generate rotating proxies for iproyal with special pool countries');
-    it.todo('Should generate sticky proxies for iproyal with special pool countries');
+    it('Should generate rotating proxies for iproyal with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw_country-us');
+      });
+    });
+
+    it('Should generate sticky proxies for iproyal with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for iproyal with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us', 'ca', 'mx'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+        },
+        11,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+      expect(result).toEqual([
+        'testhost.iproyal.com:12323:testuser:testpw_country-us',
+        'testhost.iproyal.com:12323:testuser:testpw_country-ca',
+        'testhost.iproyal.com:12323:testuser:testpw_country-mx',
+        'testhost.iproyal.com:12323:testuser:testpw_country-us',
+        'testhost.iproyal.com:12323:testuser:testpw_country-ca',
+        'testhost.iproyal.com:12323:testuser:testpw_country-mx',
+        'testhost.iproyal.com:12323:testuser:testpw_country-us',
+        'testhost.iproyal.com:12323:testuser:testpw_country-ca',
+        'testhost.iproyal.com:12323:testuser:testpw_country-mx',
+        'testhost.iproyal.com:12323:testuser:testpw_country-us',
+        'testhost.iproyal.com:12323:testuser:testpw_country-ca',
+      ]);
+    });
+
+    it('Should generate sticky proxies for iproyal with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us', 'ca', 'mx'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+        },
+        11,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-(us|ca|mx)_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
   });
 });
