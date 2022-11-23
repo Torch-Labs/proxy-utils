@@ -4,6 +4,9 @@ export type DefualtProxyConfig = {
   password: string;
   domain: string;
   port?: number;
+  state?: string;
+  city?: string;
+  sessionDuration?: number;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {

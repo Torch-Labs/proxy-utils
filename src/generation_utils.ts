@@ -37,11 +37,14 @@ export const generateProxies = (
       const proxy = generateProxyForType(
         {
           country,
+          city: config.city,
+          state: config.state,
           domain: config.domain,
           host: config.host,
           password: config.password,
           port: config.port,
           username: config.username,
+          sessionDuration: config.sessionDuration,
         },
         type,
         generationFns,

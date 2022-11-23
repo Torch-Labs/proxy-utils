@@ -192,6 +192,131 @@ describe('Proxy Generation', () => {
       });
     });
 
+    it('Should generate sticky proxies for oxylabs with 1 country and 15 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          sessionDuration: 15,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-sessid-.{8}-sesstime-15:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for oxylabs with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          city: 'los_angeles',
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for oxylabs with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          city: 'los_angeles',
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles-sessid-.{8}-sesstime-30:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for oxylabs with 1 country ,city and 15 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          city: 'los_angeles',
+          sessionDuration: 15,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles-sessid-.{8}-sesstime-15:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for oxylabs with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          state: 'us_california',
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-st-us_california:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for oxylabs with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'oxylabs.io',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          state: 'us_california',
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.OXYLABS,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.oxylabs.io:1234:customer-testuser-st-us_california-sessid-.{8}-sesstime-30:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
     it('Should generate rotating proxies for oxylabs with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -277,8 +402,134 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        console.log(proxy);
         const re = /testhost.smartproxy.com:1234:user-testuser-country-us-session-.{15}:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for smart with 1 country and 30 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          sessionDuration: 30,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.SMART,
+      );
+
+      result.forEach((proxy) => {
+        const re = /testhost.smartproxy.com:1234:user-testuser-country-us-session-.{15}-sessionduration-30:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for smart with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          city: 'new_york',
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.SMART,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:user-testuser-country-us-city-new_york:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for smart with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          city: 'new_york',
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.SMART,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.smartproxy.com:1234:user-testuser-country-us-city-new_york-session-.{15}:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for smart with 1 country, city and 30 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          city: 'new_york',
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+          sessionDuration: 30,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.SMART,
+      );
+      result.forEach((proxy) => {
+        const re =
+          /testhost.smartproxy.com:1234:user-testuser-country-us-city-new_york-session-.{15}-sessionduration-30:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for smart with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          state: 'us_california',
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.SMART,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:user-testuser-country-us-state-us_california:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for smart with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          state: 'us_california',
+          domain: 'smartproxy.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 1234,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.SMART,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.smartproxy.com:1234:user-testuser-country-us-state-us_california-session-.{15}:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -467,6 +718,49 @@ describe('Proxy Generation', () => {
       );
       result.forEach((proxy) => {
         const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for iproyal with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+          state: 'texas',
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw_country-us_state-texas');
+      });
+    });
+
+    it('Should generate sticky proxies for iproyal with country us and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+          state: 'texas',
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_state-texas_session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
