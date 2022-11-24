@@ -15,10 +15,10 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
 
   if (sessionDuration) {
     if (sessionDuration < 60) {
-      proxyString += `${sessionDuration}m`;
+      proxyString += `_lifetime-${sessionDuration}m`;
     }
     if (sessionDuration >= 60) {
-      proxyString += `${Math.floor(sessionDuration / 60)}h`;
+      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
     }
   }
 
