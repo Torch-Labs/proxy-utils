@@ -11,6 +11,18 @@ describe('Proxy Generation', () => {
       host: 'testhost',
       port: 1234,
     };
+    it.todo('Should give an empty list for empty country list', () => {
+      const result = generateProxiesForPlan(
+        {
+          ...config,
+          countryList: [],
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PACKETSTREAM,
+      );
+      expect(result).toHaveLength(0);
+    });
     it('Should generate rotating proxies for packetstream with 1 country', () => {
       const result = generateProxiesForPlan(
         config,
