@@ -11,7 +11,7 @@ describe('Proxy Generation', () => {
       host: 'testhost',
       port: 1234,
     };
-    it.todo('Should give an empty list for empty country list', () => {
+    it('Should give an empty list for empty country list', () => {
       const result = generateProxiesForPlan(
         {
           ...config,
