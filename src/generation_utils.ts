@@ -27,6 +27,11 @@ export const generateProxies = (
   if (!ProxyGenerationTypesConstant[type]) {
     throw new Error('Invalid proxy generation type');
   }
+
+  if (!config.countryList || config.countryList.length === 0) {
+    return [];
+  }
+
   const remainder = amount % config.countryList.length;
   const proxyAmount = Math.floor(amount / config.countryList.length);
 
