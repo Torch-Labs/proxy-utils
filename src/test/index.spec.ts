@@ -44,9 +44,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual(
-          'https://testhost.killerproxies.com:1234:testuser:testpw_country-UStesthost.killerproxies.com:1234:testuser:testpw_country-US',
-        );
+        expect(proxy).toEqual('https://testhost.killerproxies.com:1234:testuser:testpw_country-US');
       });
     });
 
