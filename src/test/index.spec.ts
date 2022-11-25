@@ -48,6 +48,18 @@ describe('Proxy Generation', () => {
       });
     });
 
+    it('Should generate rotating proxies for packetstream with 1 country and ssl enabled', () => {
+      const result = generateProxiesForPlan(
+        { ...config, ssl: true },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PACKETSTREAM,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('https://testhost.killerproxies.com:1234:testuser:testpw_country-US');
+      });
+    });
+
     it('Should generate rotating proxies for packetstream with multiple countries', () => {
       const result = generateProxiesForPlan(
         {
@@ -730,6 +742,68 @@ describe('Proxy Generation', () => {
       );
       result.forEach((proxy) => {
         const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for iproyal with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for iproyal with 1 country and 30 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+          sessionDuration: 30,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}_lifetime-30m/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for iproyal with 1 country and 120 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+          sessionDuration: 120,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+      result.forEach((proxy) => {
+        const re = /testhost.iproyal.com:12323:testuser:testpw_country-us_session-.{8}_lifetime-2h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });

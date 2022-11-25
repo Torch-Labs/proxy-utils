@@ -50,6 +50,7 @@ export const generateProxies = (
           port: config.port,
           username: config.username,
           sessionDuration: config.sessionDuration,
+          ssl: config.ssl,
         },
         type,
         generationFns,
