@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { randomString } from '../../utils';
+import { randomNumberString } from '../../utils';
 
 const DEFAULT_ELITE_PORT = '7777';
 
@@ -18,8 +18,8 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
     proxyString = `cc-${country.toLowerCase()}-city-${city}`;
   }
 
-  return `${host}.${domain}:${proxyPort}:customer-${username}-${proxyString}-sessid-${randomString(
-    8,
+  return `${host}.${domain}:${proxyPort}:${username}-${proxyString}-sessid-${randomNumberString(
+    7,
   )}-sesstime-${sessionTime}:${password}`;
 };
 
@@ -37,5 +37,5 @@ export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
     proxyString = `cc-${country.toLowerCase()}-city-${city}`;
   }
 
-  return `${host}.${domain}:${proxyPort}:customer-${username}-${proxyString}:${password}`;
+  return `${host}.${domain}:${proxyPort}:${username}-${proxyString}:${password}`;
 };

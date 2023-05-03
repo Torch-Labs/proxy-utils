@@ -192,7 +192,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-cc-us:testpw');
       });
     });
 
@@ -211,7 +211,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-sessid-.{8}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-cc-us-sessid-.{7}-sesstime-30:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -232,7 +232,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-sessid-.{8}-sesstime-15:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-cc-us-sessid-.{7}-sesstime-15:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -253,7 +253,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles:testpw');
       });
     });
 
@@ -273,7 +273,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles-sessid-.{8}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles-sessid-.{7}-sesstime-30:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -295,7 +295,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-us-city-los_angeles-sessid-.{8}-sesstime-15:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles-sessid-.{7}-sesstime-15:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -316,7 +316,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:customer-testuser-st-us_california:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-st-us_california:testpw');
       });
     });
 
@@ -336,7 +336,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-st-us_california-sessid-.{8}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-st-us_california-sessid-.{7}-sesstime-30:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -356,17 +356,17 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       expect(result).toEqual([
-        'testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:customer-testuser-cc-ca:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
+        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
       ]);
     });
 
@@ -385,7 +385,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:customer-testuser-cc-(us|ca|mx)-sessid-.{8}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser-cc-(us|ca|mx)-sessid-.{7}-sesstime-30:testpw/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });

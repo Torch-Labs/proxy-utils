@@ -7,7 +7,7 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toContain(expected[2]);
   expect(splitResult[3]).toEqual(expected[3]);
-  expect(splitResult[2].length).toEqual(52);
+  expect(splitResult[2].length).toEqual(42);
 };
 
 describe('Generate Oxylabs Proxies', () => {
@@ -22,7 +22,7 @@ describe('Generate Oxylabs Proxies', () => {
         username: 'testuname',
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '1234', 'customer-testuname-cc-us-sessid-', 'testpw']);
+      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname-cc-us-sessid-', 'testpw']);
     });
   });
 
@@ -37,7 +37,7 @@ describe('Generate Oxylabs Proxies', () => {
         username: 'testuname',
       });
 
-      expect(proxy).toEqual('testhost.test:1234:customer-testuname-cc-us:testpw');
+      expect(proxy).toEqual('testhost.test:1234:testuname-cc-us:testpw');
     });
   });
 });
