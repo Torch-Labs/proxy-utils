@@ -7,36 +7,38 @@ export const generateSmartStickyProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username, city, state, sessionDuration } = input;
   const proxyPort = port ?? DEFAULT_SMART_PORT;
 
-  let proxyString = `country-${country.toLowerCase()}-session-${randomString(15)}`;
+  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(15)}`;
+    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(15)}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
   }
 
   if (sessionDuration) {
-    proxyString += `-sessionduration-${sessionDuration}`;
+    proxyString += `-sesstime-${sessionDuration}`;
+  } else {
+    proxyString += `-sesstime-30`;
   }
 
-  return `${host}.${domain}:${proxyPort}:user-${username}-${proxyString}:${password}`;
+  return `${host}.${domain}:${proxyPort}:${username}:${password}-${proxyString}`;
 };
 
 export const generateSmartRotatingProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username, city, state } = input;
   const proxyPort = port ?? DEFAULT_SMART_PORT;
 
-  let proxyString = `country-${country.toLowerCase()}`;
+  let proxyString = `cc-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}`;
+    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
   }
 
-  return `${host}.${domain}:${proxyPort}:user-${username}-${proxyString}:${password}`;
+  return `${host}.${domain}:${proxyPort}:${username}:${password}-${proxyString}`;
 };

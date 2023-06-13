@@ -5,9 +5,9 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
 
   expect(splitResult[0]).toEqual(expected[0]);
   expect(splitResult[1]).toEqual(expected[1]);
-  expect(splitResult[2]).toContain(expected[2]);
-  expect(splitResult[3]).toEqual(expected[3]);
-  expect(splitResult[2].length).toEqual(49);
+  expect(splitResult[2]).toEqual(expected[2]);
+  expect(splitResult[3]).toContain(expected[3]);
+  expect(splitResult[3].length).toEqual(40);
 };
 
 describe('Generate Smart Proxies', () => {
@@ -21,8 +21,9 @@ describe('Generate Smart Proxies', () => {
         port: 1234,
         username: 'testuname',
       });
+      console.log(proxy);
 
-      expectStickyProxy(proxy, ['testhost.test', '1234', 'user-testuname-country-us-session', 'testpw']);
+      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-cc-us-sessid']);
     });
   });
 
@@ -37,7 +38,7 @@ describe('Generate Smart Proxies', () => {
         username: 'testuname',
       });
 
-      expect(proxy).toEqual('testhost.test:1234:user-testuname-country-us:testpw');
+      expect(proxy).toEqual('testhost.test:1234:testuname:testpw-cc-us');
     });
   });
 });
