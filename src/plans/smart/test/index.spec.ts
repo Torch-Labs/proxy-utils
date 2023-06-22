@@ -21,9 +21,21 @@ describe('Generate Smart Proxies', () => {
         port: 1234,
         username: 'testuname',
       });
-      console.log(proxy);
 
       expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-cc-us-sessid']);
+    });
+
+    it('should generate a sticky proxy for country belongs to eu region', () => {
+      const proxy = generateSmartStickyProxies({
+        host: 'testhost',
+        password: 'testpw',
+        country: 'GR',
+        domain: 'test',
+        port: 1234,
+        username: 'testuname',
+      });
+
+      expectStickyProxy(proxy, ['testhosteu.test', '7002', 'testuname', 'testpw-cc-gr-sessid']);
     });
   });
 
@@ -39,6 +51,19 @@ describe('Generate Smart Proxies', () => {
       });
 
       expect(proxy).toEqual('testhost.test:1234:testuname:testpw-cc-us');
+    });
+
+    it('should generate a rotating proxy for country belongs to eu region', () => {
+      const proxy = generateSmartRotatingProxies({
+        host: 'testhost',
+        password: 'testpw',
+        country: 'GR',
+        domain: 'test',
+        port: 1234,
+        username: 'testuname',
+      });
+
+      expect(proxy).toEqual('testhosteu.test:7002:testuname:testpw-cc-gr');
     });
   });
 });
