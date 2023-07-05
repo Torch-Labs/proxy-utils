@@ -192,7 +192,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-cc-us:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us');
       });
     });
 
@@ -211,12 +211,12 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-cc-us-sessid-.{7}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-30/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
 
-    it('Should generate sticky proxies for oxylabs with 1 country and 15 minutes session duration', () => {
+    it('Should generate sticky proxies for oxylabs with 1 country and 30 minutes session duration', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
@@ -225,14 +225,15 @@ describe('Proxy Generation', () => {
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          sessionDuration: 15,
+          sessionDuration: 20,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
         ProxyGenerationPlansConstant.OXYLABS,
       );
+
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-cc-us-sessid-.{7}-sesstime-15:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-20/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -241,19 +242,19 @@ describe('Proxy Generation', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
+          city: 'new_york',
           domain: 'oxylabs.io',
           password: 'testpw',
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          city: 'los_angeles',
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york');
       });
     });
 
@@ -261,41 +262,41 @@ describe('Proxy Generation', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
+          city: 'new_york',
           domain: 'oxylabs.io',
           password: 'testpw',
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          city: 'los_angeles',
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles-sessid-.{7}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-30/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
 
-    it('Should generate sticky proxies for oxylabs with 1 country ,city and 15 minutes session duration', () => {
+    it('Should generate sticky proxies for oxylabs with 1 country, city and 30 minutes session duration', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
+          city: 'new_york',
           domain: 'oxylabs.io',
           password: 'testpw',
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          city: 'los_angeles',
-          sessionDuration: 15,
+          sessionDuration: 20,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-cc-us-city-los_angeles-sessid-.{7}-sesstime-15:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-20/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -304,19 +305,19 @@ describe('Proxy Generation', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
+          state: 'us_california',
           domain: 'oxylabs.io',
           password: 'testpw',
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          state: 'us_california',
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser-st-us_california:testpw');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california');
       });
     });
 
@@ -324,19 +325,19 @@ describe('Proxy Generation', () => {
       const result = generateProxiesForPlan(
         {
           countryList: ['US'],
+          state: 'us_california',
           domain: 'oxylabs.io',
           password: 'testpw',
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          state: 'us_california',
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-st-us_california-sessid-.{7}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-30/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -356,17 +357,17 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       expect(result).toEqual([
-        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-mx:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-us:testpw',
-        'testhost.oxylabs.io:1234:testuser-cc-ca:testpw',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
       ]);
     });
 
@@ -385,7 +386,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser-cc-(us|ca|mx)-sessid-.{7}-sesstime-30:testpw/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-30/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
