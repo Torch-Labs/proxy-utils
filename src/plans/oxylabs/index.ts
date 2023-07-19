@@ -2,7 +2,7 @@ import { ProxyConfig } from '../../@types';
 import { randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
-const DEFAULT_ELITE_PORT = 7001;
+const DEFAULT_ELITE_PORT = 7777;
 
 export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username, state, city, sessionDuration } = input;

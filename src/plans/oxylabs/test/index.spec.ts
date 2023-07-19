@@ -35,7 +35,7 @@ describe('Generate Oxylabs Proxies', () => {
         username: 'testuname',
       });
 
-      expectStickyProxy(proxy, ['testhosteu.test', '7003', 'testuname', 'testpw-cc-gr-sessid']);
+      expectStickyProxy(proxy, ['testhosteu.test', '7778', 'testuname', 'testpw-cc-gr-sessid']);
     });
   });
 
@@ -63,7 +63,7 @@ describe('Generate Oxylabs Proxies', () => {
         username: 'testuname',
       });
 
-      expect(proxy).toEqual('testhosteu.test:7003:testuname:testpw-cc-gr');
+      expect(proxy).toEqual('testhosteu.test:7778:testuname:testpw-cc-gr');
     });
   });
 });

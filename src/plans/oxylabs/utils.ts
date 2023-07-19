@@ -49,7 +49,7 @@ export const formatHostAndPort = (input: { country: string; host: string; port: 
   const isEuCountry = oxylabsCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
-    return { host: `${host}eu`, port: 7003 };
+    return { host: `${host}eu`, port: 7778 };
   }
 
   return { host, port };
