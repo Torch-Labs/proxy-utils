@@ -1,41 +1,49 @@
 import { ProxyConfig } from '../../@types';
-import { randomNumberString } from '../../utils';
+import { randomString } from '../../utils';
+import { formatHostAndPort } from './utils';
 
-const DEFAULT_ELITE_PORT = '7777';
+const DEFAULT_ELITE_PORT = 7777;
 
 export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username, state, city, sessionDuration } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
 
-  let proxyString = `cc-${country.toLowerCase()}`;
-  const sessionTime = sessionDuration ?? 30;
+  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
 
-  if (state) {
-    proxyString = `st-${state}`;
-  }
+  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
 
   if (city) {
-    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
+    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
   }
 
-  return `${host}.${domain}:${proxyPort}:${username}-${proxyString}-sessid-${randomNumberString(
-    7,
-  )}-sesstime-${sessionTime}:${password}`;
+  if (state) {
+    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
+  }
+
+  if (sessionDuration) {
+    proxyString += `-sesstime-${sessionDuration}`;
+  } else {
+    proxyString += `-sesstime-30`;
+  }
+
+  return `${formattedHostAndConfig.host}.${domain}:${formattedHostAndConfig.port}:${username}:${password}-${proxyString}`;
 };
 
 export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
   const { host, password, country, domain, port, username, city, state } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
 
-  let proxyString = `cc-${country.toLowerCase()}`;
+  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
 
-  if (state) {
-    proxyString = `st-${state}`;
-  }
+  let proxyString = `cc-${country.toLowerCase()}`;
 
   if (city) {
     proxyString = `cc-${country.toLowerCase()}-city-${city}`;
   }
 
-  return `${host}.${domain}:${proxyPort}:${username}-${proxyString}:${password}`;
+  if (state) {
+    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
+  }
+
+  return `${formattedHostAndConfig.host}.${domain}:${formattedHostAndConfig.port}:${username}:${password}-${proxyString}`;
 };
