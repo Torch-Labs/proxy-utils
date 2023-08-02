@@ -23,7 +23,7 @@ export const generateSmartStickyProxies = (input: ProxyConfig) => {
   if (sessionDuration) {
     proxyString += `-sesstime-${sessionDuration}`;
   } else {
-    proxyString += `-sesstime-30`;
+    proxyString += `-sesstime-60`;
   }
 
   return `${formattedHostAndConfig.host}.${domain}:${formattedHostAndConfig.port}:${username}:${password}-${proxyString}`;

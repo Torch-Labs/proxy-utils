@@ -211,7 +211,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -274,7 +274,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -337,7 +337,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -386,7 +386,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -427,7 +427,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -490,7 +490,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -553,7 +553,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -602,7 +602,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-30/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-60/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
