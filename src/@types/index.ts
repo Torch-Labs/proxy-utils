@@ -8,6 +8,7 @@ export type DefualtProxyConfig = {
   city?: string;
   sessionDuration?: number;
   ssl?: boolean;
+  streaming?: boolean;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {

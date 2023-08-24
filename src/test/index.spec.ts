@@ -900,5 +900,26 @@ describe('Proxy Generation', () => {
         expect(re.test(proxy)).toBeTruthy();
       });
     });
+
+    it('Should generate rotating proxies for iproyal with 1 country with streaming enabled', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: 'iproyal.com',
+          password: 'testpw',
+          host: 'testhost',
+          username: 'testuser',
+          port: 12323,
+          streaming: true,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.IPROYAL,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw_country-us_streaming-1');
+      });
+    });
   });
 });
