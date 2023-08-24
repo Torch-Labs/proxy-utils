@@ -51,6 +51,7 @@ export const generateProxies = (
           username: config.username,
           sessionDuration: config.sessionDuration,
           ssl: config.ssl,
+          streaming: config.streaming,
         },
         type,
         generationFns,
