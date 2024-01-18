@@ -1,4 +1,5 @@
 import { generateSmartRotatingProxies, generateSmartStickyProxies } from '..';
+import { ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -11,15 +12,19 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
 };
 
 describe('Generate Smart Proxies', () => {
+  const commonConfig = {
+    host: 'testhost',
+    password: 'testpw',
+    domain: 'test',
+    port: 1234,
+    username: 'testuname',
+  };
   describe('generateSmartStickyProxies()', () => {
     it('should generate a sticky proxy', () => {
       const proxy = generateSmartStickyProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-cc-us-sessid']);
@@ -27,12 +32,9 @@ describe('Generate Smart Proxies', () => {
 
     it('should generate a sticky proxy for country belongs to eu region', () => {
       const proxy = generateSmartStickyProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'GR',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expectStickyProxy(proxy, ['testhosteu.test', '7002', 'testuname', 'testpw-cc-gr-sessid']);
@@ -40,27 +42,41 @@ describe('Generate Smart Proxies', () => {
   });
 
   describe('generateRotatingProxies()', () => {
-    it('should generate a rotating proxy', () => {
+    it('should generate a rotating proxy in DEFAULT format', () => {
       const proxy = generateSmartRotatingProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expect(proxy).toEqual('testhost.test:1234:testuname:testpw-cc-us');
     });
 
-    it('should generate a rotating proxy for country belongs to eu region', () => {
+    it('should generate a rotating proxy in FORMAT_1 format', () => {
       const proxy = generateSmartRotatingProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_1,
+      });
+
+      expect(proxy).toEqual('testuname:testpw-cc-us:testhost.test:1234');
+    });
+
+    it('should generate a rotating proxy in FORMAT_2 format', () => {
+      const proxy = generateSmartRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_2,
+      });
+
+      expect(proxy).toEqual('testuname:testpw-cc-us@testhost.test:1234');
+    });
+
+    it('should generate a rotating proxy in DEFAULT format for country belongs to eu region', () => {
+      const proxy = generateSmartRotatingProxies({
+        ...commonConfig,
         country: 'GR',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expect(proxy).toEqual('testhosteu.test:7002:testuname:testpw-cc-gr');

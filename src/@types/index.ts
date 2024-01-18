@@ -9,6 +9,7 @@ export type DefualtProxyConfig = {
   sessionDuration?: number;
   ssl?: boolean;
   streaming?: boolean;
+  proxyFormat: ProxyFormat;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {
@@ -36,3 +37,9 @@ export const ProxyGenerationPlansConstant = {
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
+
+export enum ProxyFormat {
+  DEFAULT = 'IP:PORT:USER:PASS',
+  FORMAT_1 = 'USER:PASS:IP:PORT',
+  FORMAT_2 = 'USER:PASS@IP:PORT',
+}

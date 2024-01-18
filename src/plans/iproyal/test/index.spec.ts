@@ -1,4 +1,5 @@
 import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from '..';
+import { ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -11,15 +12,20 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
 };
 
 describe('Generate IPRoyal Proxies', () => {
+  const commonConfig = {
+    host: 'testhost',
+    password: 'testpw',
+    domain: 'test',
+    port: 1234,
+    username: 'testuname',
+  };
+
   describe('generateIPRoyalStickyProxies()', () => {
-    it('should generate a sticky proxy', () => {
+    it('should generate a sticky proxy in DEFAULT format', () => {
       const proxy = generateIPRoyalStickyProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw_country-US_session-']);
@@ -27,17 +33,34 @@ describe('Generate IPRoyal Proxies', () => {
   });
 
   describe('generateIPRoyalRotatingProxies()', () => {
-    it('should generate a rotating proxy', () => {
+    it('should generate a rotating proxy in DEFAULT format', () => {
       const proxy = generateIPRoyalRotatingProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expect(proxy).toEqual('testhost.test:1234:testuname:testpw_country-US');
+    });
+
+    it('should generate a rotating proxy in FORMAT_1 format', () => {
+      const proxy = generateIPRoyalRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_1,
+      });
+
+      expect(proxy).toEqual('testuname:testpw_country-US:testhost.test:1234');
+    });
+
+    it('should generate a rotating proxy in FORMAT_2 format', () => {
+      const proxy = generateIPRoyalRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_2,
+      });
+
+      expect(proxy).toEqual('testuname:testpw_country-US@testhost.test:1234');
     });
   });
 });
