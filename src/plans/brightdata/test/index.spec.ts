@@ -1,4 +1,5 @@
 import { generateBrightdataRotatingProxies, generateBrightdataStickyProxies } from '..';
+import { ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -11,15 +12,19 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
 };
 
 describe('Generate Brightdata Proxies', () => {
+  const commonConfig = {
+    host: 'testhost',
+    password: 'testpw',
+    domain: 'test',
+    port: 1234,
+    username: 'testuname',
+  };
   describe('generateBrightdataStickyProxies()', () => {
     it('should generate a sticky proxy', () => {
       const proxy = generateBrightdataStickyProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname-country-US-session-', 'testpw']);
@@ -27,17 +32,34 @@ describe('Generate Brightdata Proxies', () => {
   });
 
   describe('generateBrightdataRotatingProxies()', () => {
-    it('should generate a rotating proxy', () => {
+    it('should generate a rotating proxy in DEFAULT format', () => {
       const proxy = generateBrightdataRotatingProxies({
-        host: 'testhost',
-        password: 'testpw',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
-        port: 1234,
-        username: 'testuname',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       expect(proxy).toEqual('testhost.test:1234:testuname-country-US:testpw');
+    });
+
+    it('should generate a rotating proxy in FORMAT_1 format', () => {
+      const proxy = generateBrightdataRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_1,
+      });
+
+      expect(proxy).toEqual('testuname-country-US:testpw:testhost.test:1234');
+    });
+
+    it('should generate a rotating proxy in FORMAT_2 format', () => {
+      const proxy = generateBrightdataRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_2,
+      });
+
+      expect(proxy).toEqual('testuname-country-US:testpw@testhost.test:1234');
     });
   });
 });

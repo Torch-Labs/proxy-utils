@@ -1,10 +1,10 @@
 import { ProxyConfig } from '../../@types';
-import { randomString } from '../../utils';
+import { formatProxyString, randomString } from '../../utils';
 
 const DEFAULT_IPROYAL_PORT = '12323';
 
 export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, sessionDuration, streaming } = input;
+  const { host, password, country, domain, port, username, state, sessionDuration, streaming, proxyFormat } = input;
   const defaultPort = port ?? DEFAULT_IPROYAL_PORT;
 
   let proxyString = `country-${country}_session-${randomString(8)}`;
@@ -26,11 +26,16 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     proxyString += `_streaming-1`;
   }
 
-  return `${host}.${domain}:${defaultPort}:${username}:${password}_${proxyString}`;
+  const part1 = `${host}.${domain}`;
+  const part2 = `${defaultPort}`;
+  const part3 = `${username}`;
+  const part4 = `${password}_${proxyString}`;
+
+  return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
 
 export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, streaming } = input;
+  const { host, password, country, domain, port, username, state, streaming, proxyFormat } = input;
   const defaultPort = port ?? DEFAULT_IPROYAL_PORT;
 
   let proxyString = `country-${country}`;
@@ -41,5 +46,10 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   if (streaming) {
     proxyString += `_streaming-1`;
   }
-  return `${host}.${domain}:${defaultPort}:${username}:${password}_${proxyString}`;
+  const part1 = `${host}.${domain}`;
+  const part2 = `${defaultPort}`;
+  const part3 = `${username}`;
+  const part4 = `${password}_${proxyString}`;
+
+  return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };

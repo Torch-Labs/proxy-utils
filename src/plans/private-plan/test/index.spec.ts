@@ -1,4 +1,5 @@
 import { generatePrivateRotatingProxies, generatePrivateStickyProxies } from '..';
+import { ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -12,34 +13,53 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
 };
 
 describe('Generate Private Proxies', () => {
+  const commonConfig = {
+    host: 'testhost',
+    password: 'testpass',
+    domain: 'testdomain',
+  };
+
   describe('generatePrivateStickyProxies()', () => {
-    it('should generate a sticky proxy', () => {
+    it('should generate a sticky proxy in DEFAULT format', () => {
       const proxy = generatePrivateStickyProxies({
-        host: 'test',
-        password: 'test',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['test.test', '5500', 'country-us-session', 'test']);
+      expectStickyProxy(proxy, ['testhost.testdomain', '5500', 'country-us-session', 'testpass']);
     });
   });
 
   describe('generatePrivateRotatingProxies()', () => {
-    it('should generate a rotating proxy', () => {
+    it('should generate a rotating proxy in DEFAULT format', () => {
       const proxy = generatePrivateRotatingProxies({
-        host: 'test',
-        password: 'test',
+        ...commonConfig,
         country: 'US',
-        domain: 'test',
+        proxyFormat: ProxyFormat.DEFAULT,
       });
 
       const splitResult = proxy.split(':');
 
-      expect(splitResult[0]).toEqual('test.test');
+      expect(splitResult[0]).toEqual('testhost.testdomain');
       expect(splitResult[1]).toEqual('5500');
       expect(splitResult[2]).toEqual('country-us');
-      expect(splitResult[3]).toEqual('test');
+      expect(splitResult[3]).toEqual('testpass');
+    });
+
+    it('should generate a rotating proxy in FORMAT_1 format', () => {
+      const proxy = generatePrivateRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.FORMAT_1,
+      });
+
+      const splitResult = proxy.split(':');
+
+      expect(splitResult[0]).toEqual('country-us');
+      expect(splitResult[1]).toEqual('testpass');
+      expect(splitResult[2]).toEqual('testhost.testdomain');
+      expect(splitResult[3]).toEqual('5500');
     });
   });
 });

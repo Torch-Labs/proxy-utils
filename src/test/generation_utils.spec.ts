@@ -1,4 +1,4 @@
-import { ProxyGenerationTypesConstant } from '../@types';
+import { ProxyFormat, ProxyGenerationTypesConstant } from '../@types';
 import { generateProxies, generateProxyForType } from '../generation_utils';
 import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from '../plans/packetstream';
 
@@ -22,6 +22,7 @@ describe('Proxy Generation Utils', () => {
         country: 'country',
         domain: 'domain',
         port: 1234,
+        proxyFormat: ProxyFormat.DEFAULT,
       };
       const result = generateProxyForType(input, ProxyGenerationTypesConstant.STICKY, {
         rotatingGenerationFn: generatePacketstreamRotatingProxies,
@@ -39,6 +40,7 @@ describe('Proxy Generation Utils', () => {
         country: 'country',
         domain: 'domain',
         port: 1234,
+        proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = 'host.domain:1234:username:password_country-country';
       const result = generateProxyForType(input, ProxyGenerationTypesConstant.ROTATING, {
@@ -59,6 +61,7 @@ describe('Proxy Generation Utils', () => {
         countryList: ['country'],
         domain: 'domain',
         port: 1234,
+        proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
         'host.domain:1234:username:password_country-country',
@@ -81,6 +84,7 @@ describe('Proxy Generation Utils', () => {
         countryList: ['country1', 'country2', 'country3'],
         domain: 'domain',
         port: 1234,
+        proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
         'host.domain:1234:username:password_country-country1',
@@ -106,6 +110,7 @@ describe('Proxy Generation Utils', () => {
         countryList: ['country1', 'country2', 'country3'],
         domain: 'domain',
         port: 1234,
+        proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
         'host.domain:1234:username:password_country-country1',
