@@ -958,4 +958,205 @@ describe('Proxy Generation', () => {
       });
     });
   });
+
+  describe('Geonode', () => {
+    it('Should generate rotating proxies for geonode with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('premium-residential.geonode.com:9000:testuser-country-us:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for geonode with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        const re = /premium-residential.geonode.com:10000:testuser-country-us-session-.{8}-lifetime-60:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for geonode with 1 country and 30 minutes session duration', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+          sessionDuration: 30,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        const re = /premium-residential.geonode.com:10000:testuser-country-us-session-.{8}-lifetime-30:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate sticky proxies for geonode with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+          city: 'new_york',
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        const re =
+          /premium-residential.geonode.com:10000:testuser-country-us-city-new_york-session-.{8}-lifetime-60:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for geonode with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+          city: 'new_york',
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('premium-residential.geonode.com:9000:testuser-country-us-city-new_york:testpw');
+      });
+    });
+
+    it('Should generate sticky proxies for geonode with 1 country and state', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+          state: 'california',
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        const re =
+          /premium-residential.geonode.com:10000:testuser-country-us-state-california-session-.{8}-lifetime-60:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+
+    it('Should generate rotating proxies for geonode with 1 country and city', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+          state: 'california',
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('premium-residential.geonode.com:9000:testuser-country-us-state-california:testpw');
+      });
+    });
+
+    it('Should generate rotating proxies for geonode with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US', 'CA', 'MX'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        11,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+      expect(result).toEqual([
+        'premium-residential.geonode.com:9000:testuser-country-us:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-ca:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-mx:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-us:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-ca:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-mx:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-us:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-ca:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-mx:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-us:testpw',
+        'premium-residential.geonode.com:9000:testuser-country-ca:testpw',
+      ]);
+    });
+
+    it('Should generate sticky proxies for geonode with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['US', 'CA', 'MX'],
+          domain: 'geonode.com',
+          password: 'testpw',
+          host: 'premium-residential',
+          username: 'testuser',
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        11,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.GEONODE,
+      );
+      result.forEach((proxy) => {
+        const re = /premium-residential.geonode.com:10000:testuser-country-(us|ca|mx)-session-.{8}-lifetime-60:testpw/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+  });
 });

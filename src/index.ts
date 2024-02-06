@@ -6,6 +6,7 @@ import {
 } from './@types';
 import { generateProxies } from './generation_utils';
 import { generateBrightdataRotatingProxies, generateBrightdataStickyProxies } from './plans/brightdata';
+import { generateGeonodeRotatingProxies, generateGeonodeStickyProxies } from './plans/geonode';
 import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from './plans/iproyal';
 import { generateOxylabsRotatingProxies, generateOxylabsStickyProxies } from './plans/oxylabs';
 import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from './plans/packetstream';
@@ -48,6 +49,11 @@ export const generateProxiesForPlan = (
       return generateProxies(config, amount, type, {
         rotatingGenerationFn: generateIPRoyalRotatingProxies,
         stickyGenerationFn: generateIPRoyalStickyProxies,
+      });
+    case ProxyGenerationPlansConstant.GEONODE:
+      return generateProxies(config, amount, type, {
+        rotatingGenerationFn: generateGeonodeRotatingProxies,
+        stickyGenerationFn: generateGeonodeStickyProxies,
       });
     default:
       throw new Error('Not implemented');

@@ -34,6 +34,7 @@ export const ProxyGenerationPlansConstant = {
   OXYLABS: 'OXYLABS',
   SMART: 'SMART',
   IPROYAL: 'IPROYAL',
+  GEONODE: 'GEONODE',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
