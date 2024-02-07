@@ -21,6 +21,7 @@ export const oxylabsCountryRegions = {
     { country: 'Turkey', code: 'TR' },
     { country: 'Azerbaijan', code: 'AZ' },
     { country: 'Kazakhstan', code: 'KZ' },
+    { country: 'Austria', code: 'AT' },
   ],
   asia: [
     { country: 'Australia', code: 'AU' },

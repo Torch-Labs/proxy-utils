@@ -19,6 +19,7 @@ export const smartCountryRegions = {
     { country: 'Poland', code: 'PL' },
     { country: 'Israel', code: 'IL' },
     { country: 'Turkey', code: 'TR' },
+    { country: 'Austria', code: 'AT' },
   ],
   asia: [
     { country: 'Australia', code: 'AU' },
