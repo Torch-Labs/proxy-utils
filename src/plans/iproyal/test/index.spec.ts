@@ -8,7 +8,7 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toEqual(expected[2]);
   expect(splitResult[3]).toContain(expected[3]);
-  expect(splitResult[3].length).toEqual(34);
+  expect(splitResult[3].length).toEqual(43);
 };
 
 describe('Generate IPRoyal Proxies', () => {
@@ -40,7 +40,7 @@ describe('Generate IPRoyal Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:1234:testuname:testpw_country-US');
+      expect(proxy).toEqual('testhost.test:1234:testuname:testpw_country-US_direct-1');
     });
 
     it('should generate a rotating proxy in FORMAT_1 format', () => {
@@ -50,7 +50,7 @@ describe('Generate IPRoyal Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_1,
       });
 
-      expect(proxy).toEqual('testuname:testpw_country-US:testhost.test:1234');
+      expect(proxy).toEqual('testuname:testpw_country-US_direct-1:testhost.test:1234');
     });
 
     it('should generate a rotating proxy in FORMAT_2 format', () => {
@@ -60,7 +60,7 @@ describe('Generate IPRoyal Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_2,
       });
 
-      expect(proxy).toEqual('testuname:testpw_country-US@testhost.test:1234');
+      expect(proxy).toEqual('testuname:testpw_country-US_direct-1@testhost.test:1234');
     });
   });
 });
