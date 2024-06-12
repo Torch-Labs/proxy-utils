@@ -1,55 +1,59 @@
 import { ProxyConfig } from '../../@types';
 import { formatProxyString, randomString } from '../../utils';
+import { formatHostAndPort } from './utils';
 
-const DEFAULT_IPROYAL_PORT = '12321';
+const DEFAULT_IPROYAL_PORT = 7779;
 
 export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, sessionDuration, streaming, proxyFormat } = input;
-  const defaultPort = port ?? DEFAULT_IPROYAL_PORT;
+  const { host, password, country, domain, port, username, state, city, sessionDuration, proxyFormat } = input;
+  const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
 
-  let proxyString = `country-${country}_session-${randomString(8)}`;
+  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
+
+  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
+
+  if (city) {
+    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
+  }
 
   if (state) {
-    proxyString = `country-${country}_state-${state}_session-${randomString(8)}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
   }
 
   if (sessionDuration) {
-    if (sessionDuration < 60) {
-      proxyString += `_lifetime-${sessionDuration}m`;
-    }
-    if (sessionDuration >= 60) {
-      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
-    }
+    proxyString += `-sesstime-${sessionDuration}`;
+  } else {
+    proxyString += `-sesstime-60`;
   }
 
-  if (streaming) {
-    proxyString += `_streaming-1`;
-  }
-
-  const part1 = `${host}.${domain}`;
-  const part2 = `${defaultPort}`;
+  const part1 = `${formattedHostAndConfig.host}.${domain}`;
+  const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}_${proxyString}_direct-1`;
+  const part4 = `${password}-${proxyString}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
 
 export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, streaming, proxyFormat } = input;
-  const defaultPort = port ?? DEFAULT_IPROYAL_PORT;
+  const { host, password, country, domain, port, username, city, state, proxyFormat } = input;
+  const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
 
-  let proxyString = `country-${country}`;
+  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
+
+  let proxyString = `cc-${country.toLowerCase()}`;
+
+  if (city) {
+    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
+  }
 
   if (state) {
-    proxyString = `country-${country}_state-${state}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
   }
-  if (streaming) {
-    proxyString += `_streaming-1`;
-  }
-  const part1 = `${host}.${domain}`;
-  const part2 = `${defaultPort}`;
+
+  const part1 = `${formattedHostAndConfig.host}.${domain}`;
+  const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}_${proxyString}_direct-1`;
+  const part4 = `${password}-${proxyString}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
