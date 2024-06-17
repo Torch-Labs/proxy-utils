@@ -48,6 +48,7 @@ export const generateProxies = (
           host: config.host,
           password: config.password,
           port: config.port,
+          euPort: config.euPort,
           username: config.username,
           sessionDuration: config.sessionDuration,
           ssl: config.ssl,

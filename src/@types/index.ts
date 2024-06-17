@@ -4,6 +4,7 @@ export type DefualtProxyConfig = {
   password: string;
   domain: string;
   port?: number;
+  euPort?: number;
   state?: string;
   city?: string;
   sessionDuration?: number;

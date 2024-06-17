@@ -2,13 +2,20 @@ import { ProxyConfig } from '../../@types';
 import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
-const DEFAULT_IPROYAL_PORT = 7779;
+const DEFAULT_IPROYAL_PORT = 12321;
+const DEFAULT_IPROYAL_EU_PORT = 12323;
 
 export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, city, sessionDuration, proxyFormat } = input;
+  const { host, password, country, domain, port, username, state, city, sessionDuration, proxyFormat, euPort } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
+  const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
 
-  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
+  const formattedHostAndConfig = formatHostAndPort({
+    host,
+    port: proxyPort,
+    euPort: proxyEuPort,
+    country: country.toLowerCase(),
+  });
 
   let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
 
@@ -35,10 +42,16 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, proxyFormat } = input;
+  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
+  const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
 
-  const formattedHostAndConfig = formatHostAndPort({ host, port: proxyPort, country: country.toLowerCase() });
+  const formattedHostAndConfig = formatHostAndPort({
+    host,
+    port: proxyPort,
+    euPort: proxyEuPort,
+    country: country.toLowerCase(),
+  });
 
   let proxyString = `cc-${country.toLowerCase()}`;
 
