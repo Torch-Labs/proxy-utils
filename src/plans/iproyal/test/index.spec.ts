@@ -82,5 +82,16 @@ describe('Generate Iproyal Proxies', () => {
 
       expect(proxy).toEqual('testhosteu.test:12323:testuname:testpw-cc-gr');
     });
+
+    it('should generate a rotating proxy in DEFAULT format for country belongs to eu region and streaming is true', () => {
+      const proxy = generateIPRoyalRotatingProxies({
+        ...commonConfig,
+        streaming: true,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toEqual('testhosteu.test:12323:testuname:testpw-cc-gr_streaming-1');
+    });
   });
 });

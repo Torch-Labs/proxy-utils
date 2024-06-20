@@ -6,7 +6,20 @@ const DEFAULT_IPROYAL_PORT = 12321;
 const DEFAULT_IPROYAL_EU_PORT = 12323;
 
 export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, city, sessionDuration, proxyFormat, euPort } = input;
+  const {
+    host,
+    password,
+    country,
+    domain,
+    port,
+    username,
+    state,
+    city,
+    sessionDuration,
+    proxyFormat,
+    euPort,
+    streaming,
+  } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
 
@@ -33,6 +46,10 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     proxyString += `-sesstime-60`;
   }
 
+  if (streaming) {
+    proxyString += `_streaming-1`;
+  }
+
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
@@ -42,7 +59,7 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
+  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort, streaming } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
 
@@ -61,6 +78,10 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
 
   if (state) {
     proxyString = `cc-${country.toLowerCase()}-state-${state}`;
+  }
+
+  if (streaming) {
+    proxyString += `_streaming-1`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
