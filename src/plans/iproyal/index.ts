@@ -30,20 +30,24 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     country: country.toLowerCase(),
   });
 
-  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
   }
 
   if (sessionDuration) {
-    proxyString += `-sesstime-${sessionDuration}`;
+    if (sessionDuration >= 60) {
+      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+    } else {
+      proxyString += `_lifetime-${sessionDuration}m`;
+    }
   } else {
-    proxyString += `-sesstime-60`;
+    proxyString += `_lifetime-1h`;
   }
 
   if (streaming) {
@@ -70,14 +74,14 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
     country: country.toLowerCase(),
   });
 
-  let proxyString = `cc-${country.toLowerCase()}`;
+  let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}`;
   }
 
   if (state) {
-    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}`;
   }
 
   if (streaming) {
