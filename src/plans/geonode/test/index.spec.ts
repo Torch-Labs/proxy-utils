@@ -16,7 +16,6 @@ describe('Generate Geonode Proxies', () => {
         country: 'US',
         proxyFormat: ProxyFormat.DEFAULT,
       });
-      console.log(proxy);
 
       const re = /testhost.test:10000:testuname-country-us-session-.{8}-lifetime-60:testpw/g;
 
