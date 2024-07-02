@@ -64,11 +64,13 @@ export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
   const { host, euHost, asiaHost, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
   const euProxyPort = euPort ?? DEFAULT_ELITE_EU_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
     host: host,
-    euHost: euHost,
-    asiaHost: asiaHost,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: euProxyPort,
     country: country.toLowerCase(),
