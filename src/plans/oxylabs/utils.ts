@@ -45,12 +45,12 @@ export const oxylabsCountryRegions = {
   ],
 };
 
-export const formatHostAndPort = (input: { country: string; host: string; port: number }) => {
-  const { country, host, port } = input;
+export const formatHostAndPort = (input: { country: string; host: string; port: number; euPort: number }) => {
+  const { country, host, port, euPort } = input;
   const isEuCountry = oxylabsCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
-    return { host: `${host}eu`, port: 7778 };
+    return { host: `${host}eu`, port: euPort };
   }
 
   return { host, port };
