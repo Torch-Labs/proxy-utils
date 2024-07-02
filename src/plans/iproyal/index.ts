@@ -27,8 +27,8 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
   const proxyAsiaPort = asiaPort ?? DEFAULT_IPROYAL_ASIA_PORT;
-  const proxyEuHost = euHost ?? `${host}eu`;
-  const proxyAsiaHost = euHost ?? `${host}asia`;
+  const proxyEuHost = euHost ? euHost : `${host}eu`;
+  const proxyAsiaHost = asiaHost ? asiaHost : `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
     host: host,

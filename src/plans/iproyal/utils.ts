@@ -118,7 +118,7 @@ export const formatHostAndPort = (input: {
   const isEuCountry = iproyalCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
-    return { euHost: euHost, port: euPort };
+    return { host: euHost, port: euPort };
   }
 
   const isAsiaCountry = iproyalCountryRegions.asia.find((rgn) => rgn.code.toLowerCase() === country);

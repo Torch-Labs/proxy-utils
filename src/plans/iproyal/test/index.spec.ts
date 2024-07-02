@@ -61,7 +61,7 @@ describe('Generate Iproyal Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:12321:testuname:testpw-country-us');
+      expect(proxy).toEqual('testeu.test:12323:testuname:testpw-country-de');
     });
 
     it('should generate a rotating proxy in FORMAT_1 format', () => {
