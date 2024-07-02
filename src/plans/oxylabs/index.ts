@@ -7,12 +7,30 @@ const DEFAULT_ELITE_PORT = 7777;
 const DEFAULT_ELITE_EU_PORT = 7778;
 
 export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, state, city, sessionDuration, proxyFormat, euPort } = input;
+  const {
+    host,
+    euHost,
+    asiaHost,
+    password,
+    country,
+    domain,
+    port,
+    username,
+    state,
+    city,
+    sessionDuration,
+    proxyFormat,
+    euPort,
+  } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
   const euProxyPort = euPort ?? DEFAULT_ELITE_EU_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: euProxyPort,
     country: country.toLowerCase(),
@@ -43,12 +61,14 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
+  const { host, euHost, asiaHost, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
   const euProxyPort = euPort ?? DEFAULT_ELITE_EU_PORT;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: euHost,
+    asiaHost: asiaHost,
     port: proxyPort,
     euPort: euProxyPort,
     country: country.toLowerCase(),

@@ -9,6 +9,8 @@ const DEFAULT_IPROYAL_ASIA_PORT = 12322;
 export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
   const {
     host,
+    euHost,
+    asiaHost,
     password,
     country,
     domain,
@@ -25,9 +27,13 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
   const proxyAsiaPort = asiaPort ?? DEFAULT_IPROYAL_ASIA_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: proxyEuPort,
     asiaPort: proxyAsiaPort,
@@ -67,14 +73,32 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort, streaming, asiaPort } =
-    input;
+  const {
+    host,
+    euHost,
+    asiaHost,
+    password,
+    country,
+    domain,
+    port,
+    username,
+    city,
+    state,
+    proxyFormat,
+    euPort,
+    streaming,
+    asiaPort,
+  } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
   const proxyAsiaPort = asiaPort ?? DEFAULT_IPROYAL_ASIA_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: proxyEuPort,
     asiaPort: proxyAsiaPort,

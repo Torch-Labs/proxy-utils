@@ -6,12 +6,30 @@ const DEFAULT_SMART_PORT = 7000;
 const DEFAULT_SMART_EU_PORT = 7002;
 
 export const generateSmartStickyProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, sessionDuration, proxyFormat, euPort } = input;
+  const {
+    host,
+    euHost,
+    asiaHost,
+    password,
+    country,
+    domain,
+    port,
+    username,
+    city,
+    state,
+    sessionDuration,
+    proxyFormat,
+    euPort,
+  } = input;
   const proxyPort = port ?? DEFAULT_SMART_PORT;
   const euProxyPort = euPort ?? DEFAULT_SMART_EU_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: euProxyPort,
     country: country.toLowerCase(),
@@ -42,12 +60,16 @@ export const generateSmartStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generateSmartRotatingProxies = (input: ProxyConfig) => {
-  const { host, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
+  const { host, euHost, asiaHost, password, country, domain, port, username, city, state, proxyFormat, euPort } = input;
   const proxyPort = port ?? DEFAULT_SMART_PORT;
   const euProxyPort = euPort ?? DEFAULT_SMART_EU_PORT;
+  const proxyEuHost = euHost ?? `${host}eu`;
+  const proxyAsiaHost = euHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
-    host,
+    host: host,
+    euHost: proxyEuHost,
+    asiaHost: proxyAsiaHost,
     port: proxyPort,
     euPort: euProxyPort,
     country: country.toLowerCase(),
