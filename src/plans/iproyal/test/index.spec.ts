@@ -53,6 +53,17 @@ describe('Generate Iproyal Proxies', () => {
       expect(proxy).toEqual('testhost.test:12321:testuname:testpw-country-us');
     });
 
+    it('should generate rotating proxy for EU countries', () => {
+      const proxy = generateIPRoyalRotatingProxies({
+        ...commonConfig,
+        euHost: 'testeu',
+        country: 'DE',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toEqual('testeu.test:12323:testuname:testpw-country-de');
+    });
+
     it('should generate a rotating proxy in FORMAT_1 format', () => {
       const proxy = generateIPRoyalRotatingProxies({
         ...commonConfig,

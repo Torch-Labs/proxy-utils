@@ -1,5 +1,7 @@
 export type DefualtProxyConfig = {
   host: string;
+  euHost?: string;
+  asiaHost?: string;
   username?: string;
   password: string;
   domain: string;
