@@ -36,6 +36,28 @@ export const generateProxies = (
   const proxyAmount = Math.floor(amount / config.countryList.length);
 
   const generatedProxyList = [];
+  const commonConfig = {
+    domain: config.domain,
+    host: config.host,
+    euHost: config.euHost,
+    asiaHost: config.asiaHost,
+    password: config.password,
+    port: config.port,
+    euPort: config.euPort,
+    asiaPort: config.asiaPort,
+    username: config.username,
+    sessionDuration: config.sessionDuration,
+    ssl: config.ssl,
+    streaming: config.streaming,
+    proxyFormat: config.proxyFormat,
+    authType: config.authType,
+    httpsPort: config.httpsPort,
+    socksPort: config.socksPort,
+    stickyPort: config.stickyPort,
+    rotatingPort: config.rotatingPort,
+    socksStickyPort: config.socksStickyPort,
+    socksRotatingPort: config.socksRotatingPort,
+  };
 
   for (let i = 0; i < proxyAmount; i++) {
     config.countryList.forEach((country) => {
@@ -44,17 +66,7 @@ export const generateProxies = (
           country,
           city: config.city,
           state: config.state,
-          domain: config.domain,
-          host: config.host,
-          password: config.password,
-          port: config.port,
-          euPort: config.euPort,
-          asiaPort: config.asiaPort,
-          username: config.username,
-          sessionDuration: config.sessionDuration,
-          ssl: config.ssl,
-          streaming: config.streaming,
-          proxyFormat: config.proxyFormat,
+          ...commonConfig,
         },
         type,
         generationFns,
@@ -68,16 +80,7 @@ export const generateProxies = (
       const proxy = generateProxyForType(
         {
           country: config.countryList[i],
-          domain: config.domain,
-          host: config.host,
-          password: config.password,
-          port: config.port,
-          euPort: config.euPort,
-          asiaPort: config.asiaPort,
-          username: config.username,
-          ssl: config.ssl,
-          streaming: config.streaming,
-          proxyFormat: config.proxyFormat,
+          ...commonConfig,
         },
         type,
         generationFns,

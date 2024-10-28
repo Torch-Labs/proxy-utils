@@ -1,5 +1,5 @@
 import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies } from '..';
-import { ProxyFormat } from '../../../@types';
+import { AuthType, ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -25,21 +25,21 @@ describe('Generate Basic Proxies', () => {
       const input = { ...commonInput, proxyFormat: ProxyFormat.DEFAULT };
       const result = generatePacketstreamStickyProxies(input);
 
-      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password_country-country_session-']);
+      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-country-country_session-']);
     });
 
     it('should generate a sticky proxy (FORMAT_1 format)', () => {
       const input = { ...commonInput, proxyFormat: ProxyFormat.FORMAT_1 };
       const result = generatePacketstreamStickyProxies(input);
 
-      expectStickyProxy(result, ['username', 'password_country-country_session-', 'host.domain', '1234']);
+      expectStickyProxy(result, ['username', 'password-country-country_session-', 'host.domain', '1234']);
     });
   });
 
   describe('generateRotatingProxies()', () => {
     it('should generate a rotating proxy (DEFAULT format)', () => {
       const input = { ...commonInput, proxyFormat: ProxyFormat.DEFAULT };
-      const expected = 'host.domain:1234:username:password_country-country';
+      const expected = 'host.domain:1234:username:password-country-country';
       const result = generatePacketstreamRotatingProxies(input);
 
       expect(result).toEqual(expected);
@@ -47,7 +47,7 @@ describe('Generate Basic Proxies', () => {
 
     it('should generate a rotating proxy (FORMAT_1 format)', () => {
       const input = { ...commonInput, proxyFormat: ProxyFormat.FORMAT_1 };
-      const expected = 'username:password_country-country:host.domain:1234';
+      const expected = 'username:password-country-country:host.domain:1234';
       const result = generatePacketstreamRotatingProxies(input);
 
       expect(result).toEqual(expected);
@@ -55,7 +55,7 @@ describe('Generate Basic Proxies', () => {
 
     it('should generate a rotating proxy (FORMAT_2 format)', () => {
       const input = { ...commonInput, proxyFormat: ProxyFormat.FORMAT_2 };
-      const expected = 'username:password_country-country@host.domain:1234';
+      const expected = 'username:password-country-country@host.domain:1234';
       const result = generatePacketstreamRotatingProxies(input);
 
       expect(result).toEqual(expected);

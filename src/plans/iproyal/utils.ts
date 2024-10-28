@@ -108,21 +108,23 @@ export const iproyalCountryRegions = {
 export const formatHostAndPort = (input: {
   country: string;
   host: string;
+  euHost: string;
+  asiaHost: string;
   port: number;
   euPort: number;
   asiaPort: number;
 }) => {
-  const { country, host, port, euPort, asiaPort } = input;
+  const { country, host, euHost, asiaHost, port, euPort, asiaPort } = input;
   const isEuCountry = iproyalCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
-    return { host: `${host}eu`, port: euPort };
+    return { host: euHost, port: euPort };
   }
 
   const isAsiaCountry = iproyalCountryRegions.asia.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isAsiaCountry) {
-    return { host: `${host}asia`, port: asiaPort };
+    return { host: asiaHost, port: asiaPort };
   }
 
   return { host, port };
