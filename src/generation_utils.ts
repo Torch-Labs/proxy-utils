@@ -50,6 +50,13 @@ export const generateProxies = (
     ssl: config.ssl,
     streaming: config.streaming,
     proxyFormat: config.proxyFormat,
+    authType: config.authType,
+    httpsPort: config.httpsPort,
+    socksPort: config.socksPort,
+    stickyPort: config.stickyPort,
+    rotatingPort: config.rotatingPort,
+    socksStickyPort: config.socksStickyPort,
+    socksRotatingPort: config.socksRotatingPort,
   };
 
   for (let i = 0; i < proxyAmount; i++) {

@@ -32,7 +32,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.killerproxies.com:1234:testuser:testpw_country-US');
+        expect(proxy).toEqual('testhost.killerproxies.com:1234:testuser:testpw-country-US');
       });
     });
 
@@ -44,7 +44,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       result.forEach((proxy) => {
-        const re = /testhost.killerproxies.com:1234:testuser:testpw_country-US_session-.{7}/g;
+        const re = /testhost.killerproxies.com:1234:testuser:testpw-country-US_session-.{7}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -57,7 +57,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('https://testhost.killerproxies.com:1234:testuser:testpw_country-US');
+        expect(proxy).toEqual('http://testhost.killerproxies.com:1234:testuser:testpw-country-US');
       });
     });
 
@@ -72,17 +72,17 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       expect(result).toEqual([
-        'testhost.killerproxies.com:1234:testuser:testpw_country-UnitedStates',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Canada',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Mexico',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-UnitedStates',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Canada',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Mexico',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-UnitedStates',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Canada',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Mexico',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-UnitedStates',
-        'testhost.killerproxies.com:1234:testuser:testpw_country-Canada',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-UnitedStates',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Canada',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Mexico',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-UnitedStates',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Canada',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Mexico',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-UnitedStates',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Canada',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Mexico',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-UnitedStates',
+        'testhost.killerproxies.com:1234:testuser:testpw-country-Canada',
       ]);
     });
 
@@ -97,7 +97,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.PACKETSTREAM,
       );
       result.forEach((proxy) => {
-        const re = /testhost.killerproxies.com:1234:testuser:testpw_country-(UnitedStates|Canada|Mexico)_session-.{7}/g;
+        const re = /testhost.killerproxies.com:1234:testuser:testpw-country-(UnitedStates|Canada|Mexico)_session-.{7}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });

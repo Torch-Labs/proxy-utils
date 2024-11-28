@@ -14,6 +14,13 @@ export type DefualtProxyConfig = {
   ssl?: boolean;
   streaming?: boolean;
   proxyFormat: ProxyFormat;
+  authType?: AuthType;
+  httpsPort?: number;
+  socksPort?: number;
+  stickyPort?: number;
+  rotatingPort?: number;
+  socksStickyPort?: number;
+  socksRotatingPort?: number;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {
@@ -47,4 +54,11 @@ export enum ProxyFormat {
   DEFAULT = 'IP:PORT:USER:PASS',
   FORMAT_1 = 'USER:PASS:IP:PORT',
   FORMAT_2 = 'USER:PASS@IP:PORT',
+}
+
+export enum AuthType {
+  HTTP = 'HTTP',
+  HTTPS = 'HTTPS',
+  SOCKS5 = 'SOCKS5',
+  'HTTP/HTTPS' = 'HTTP/HTTPS',
 }

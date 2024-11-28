@@ -93,7 +93,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
   const proxyAsiaPort = asiaPort ?? DEFAULT_IPROYAL_ASIA_PORT;
   const proxyEuHost = euHost ?? `${host}eu`;
-  const proxyAsiaHost = euHost ?? `${host}asia`;
+  const proxyAsiaHost = asiaHost ?? `${host}asia`;
 
   const formattedHostAndConfig = formatHostAndPort({
     host: host,
