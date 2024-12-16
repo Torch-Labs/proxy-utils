@@ -1159,4 +1159,119 @@ describe('Proxy Generation', () => {
       });
     });
   });
+
+  describe('PlanX', () => {
+    it('Should generate rotating proxies for planx with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: '',
+          password: 'testpw',
+          host: '',
+          username: 'testuser',
+          port: 12323,
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PLANX,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('geox.x.proxiess.com:6011:testuser:testpw-country-us');
+      });
+    });
+    it('Should generate sticky proxies for planx with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us'],
+          domain: '',
+          password: 'testpw',
+          host: '',
+          username: 'testuser',
+          port: 12323,
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.PLANX,
+      );
+
+      result.forEach((proxy) => {
+        const re = /geox.x.proxiess.com:6011:testuser:testpw-country-us_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+    it('Should generate rotating proxies for planx with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['usx'],
+          domain: '',
+          password: 'testpw',
+          host: '',
+          username: 'testuser',
+          port: 12323,
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PLANX,
+      );
+
+      result.forEach((proxy) => {
+        expect(proxy).toEqual('usax.x.proxiess.com:6000:testuser:testpw');
+      });
+    });
+    it('Should generate sticky proxies for planx with 1 country', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['usx'],
+          domain: '',
+          password: 'testpw',
+          host: '',
+          username: 'testuser',
+          port: 12323,
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        10,
+        ProxyGenerationTypesConstant.STICKY,
+        ProxyGenerationPlansConstant.PLANX,
+      );
+
+      result.forEach((proxy) => {
+        const re = /usax.x.proxiess.com:6000:testuser:testpw-country-usx_session-.{8}/g;
+        expect(re.test(proxy)).toBeTruthy();
+      });
+    });
+    it('Should generate rotating proxies for planx with multiple countries', () => {
+      const result = generateProxiesForPlan(
+        {
+          countryList: ['us', 'nl', 'au', 'usx', 'nlx', 'aux'],
+          domain: '',
+          password: 'testpw',
+          host: '',
+          username: 'testuser',
+          port: 12323,
+          proxyFormat: ProxyFormat.DEFAULT,
+        },
+        11,
+        ProxyGenerationTypesConstant.ROTATING,
+        ProxyGenerationPlansConstant.PLANX,
+      );
+
+      expect(result).toEqual([
+        'geox.x.proxiess.com:6011:testuser:testpw-country-us',
+        'geoxeu.x.proxiess.com:6012:testuser:testpw-country-nl',
+        'geoxasia.x.proxiess.com:6013:testuser:testpw-country-au',
+        'usax.x.proxiess.com:6000:testuser:testpw',
+        'nlx.x.proxiess.com:6008:testuser:testpw',
+        'aux.x.proxiess.com:6002:testuser:testpw',
+        'geox.x.proxiess.com:6011:testuser:testpw-country-us',
+        'geoxeu.x.proxiess.com:6012:testuser:testpw-country-nl',
+        'geoxasia.x.proxiess.com:6013:testuser:testpw-country-au',
+        'usax.x.proxiess.com:6000:testuser:testpw',
+        'nlx.x.proxiess.com:6008:testuser:testpw',
+      ]);
+    });
+  });
 });
