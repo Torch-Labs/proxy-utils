@@ -695,7 +695,7 @@ export const poolXCountries = [
   {
     name: 'Tickets - USA',
     code: 'USX1',
-    pool: 'USAT',
+    pool: 'USATX',
     poolType: 'Main Pool',
     isCustomCode: true,
   },
