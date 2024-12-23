@@ -1178,7 +1178,7 @@ export const poolXCountries = [
   {
     name: 'Spain',
     code: 'ES',
-    pool: 'geoxeu',
+    pool: 'geox',
     poolType: 'Main Pool',
     isCustomCode: false,
   },
