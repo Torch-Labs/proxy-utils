@@ -4,7 +4,7 @@ export type DefualtProxyConfig = {
   asiaHost?: string;
   username?: string;
   password: string;
-  domain: string;
+  domain?: string;
   port?: number;
   euPort?: number;
   asiaPort?: number;
@@ -21,6 +21,14 @@ export type DefualtProxyConfig = {
   rotatingPort?: number;
   socksStickyPort?: number;
   socksRotatingPort?: number;
+  poolConfig?: PoolConfig[];
+};
+
+export type PoolConfig = {
+  name: string;
+  host: string;
+  port: number;
+  domain: string;
 };
 
 export type ProxyConfig = DefualtProxyConfig & {
@@ -46,6 +54,7 @@ export const ProxyGenerationPlansConstant = {
   SMART: 'SMART',
   IPROYAL: 'IPROYAL',
   GEONODE: 'GEONODE',
+  PLANX: 'PLANX',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
