@@ -648,7 +648,7 @@ describe('Proxy Generation', () => {
       );
       result.forEach((proxy) => {
         expect(proxy).toEqual(
-          'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
+          'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us',
         );
       });
     });
@@ -671,7 +671,7 @@ describe('Proxy Generation', () => {
 
       result.forEach((proxy) => {
         const re =
-          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us-session-.{15}:testpw/g;
+          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us-session-.{15}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -693,17 +693,17 @@ describe('Proxy Generation', () => {
       );
 
       expect(result).toEqual([
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-mx:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-us:testpw',
-        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-ca:testpw',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-ca',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-mx',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-ca',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-mx',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-ca',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-mx',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-us',
+        'testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-ca',
       ]);
     });
 
@@ -725,7 +725,7 @@ describe('Proxy Generation', () => {
 
       result.forEach((proxy) => {
         const re =
-          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a-country-(us|ca|mx)-session-.{15}:testpw/g;
+          /testhost.brightdata.com:24046:1234567f62657475786b3863713740746f7263686c6162732e78797a:testpw-country-(us|ca|mx)-session-.{15}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
