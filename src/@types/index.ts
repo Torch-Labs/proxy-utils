@@ -2,12 +2,18 @@ export type DefualtProxyConfig = {
   host: string;
   euHost?: string;
   asiaHost?: string;
+  socksHost?: string;
+  socksEuHost?: string;
+  socksAsiaHost?: string;
   username?: string;
   password: string;
   domain?: string;
   port?: number;
   euPort?: number;
   asiaPort?: number;
+  socksPort?: number;
+  socksEuPort?: number;
+  socksAsiaPort?: number;
   state?: string;
   city?: string;
   sessionDuration?: number;
@@ -16,7 +22,6 @@ export type DefualtProxyConfig = {
   proxyFormat: ProxyFormat;
   authType?: AuthType;
   httpsPort?: number;
-  socksPort?: number;
   stickyPort?: number;
   rotatingPort?: number;
   socksStickyPort?: number;

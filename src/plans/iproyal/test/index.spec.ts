@@ -1,5 +1,5 @@
 import { generateIPRoyalRotatingProxies, generateIPRoyalStickyProxies } from '..';
-import { ProxyFormat } from '../../../@types';
+import { AuthType, ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -39,6 +39,29 @@ describe('Generate Iproyal Proxies', () => {
       });
 
       expectStickyProxy(proxy, ['testhosteu.test', '12323', 'testuname', 'testpw-country-gr_session']);
+    });
+    it('should generate a socks sticky proxy', () => {
+      const proxy = generateIPRoyalStickyProxies({
+        ...commonConfig,
+        country: 'US',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksHost: 'socksiproyal',
+        socksPort: 12324,
+        authType: AuthType.SOCKS5,
+      });
+
+      expectStickyProxy(proxy, ['socksiproyal.test', '12324', 'testuname', 'testpw-country-us_session']);
+    });
+    it('should generate a socks sticky proxy for country belongs to eu region', () => {
+      const proxy = generateIPRoyalStickyProxies({
+        ...commonConfig,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksHost: 'socksiproyal',
+        authType: AuthType.SOCKS5,
+      });
+
+      expectStickyProxy(proxy, ['socksiproyaleu.test', '12326', 'testuname', 'testpw-country-gr_session']);
     });
   });
 
@@ -103,6 +126,17 @@ describe('Generate Iproyal Proxies', () => {
       });
 
       expect(proxy).toEqual('testhosteu.test:12323:testuname:testpw-country-gr_streaming-1');
+    });
+    it('should generate a socks sticky proxy for country belongs to eu region', () => {
+      const proxy = generateIPRoyalRotatingProxies({
+        ...commonConfig,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksHost: 'socksiproyal',
+        authType: AuthType.SOCKS5,
+      });
+
+      expect(proxy).toEqual('socksiproyaleu.test:12326:testuname:testpw-country-gr');
     });
   });
 });
