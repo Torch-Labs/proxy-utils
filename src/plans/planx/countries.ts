@@ -686,7 +686,7 @@ export const poolXCountries = [
     isCustomCode: false,
   },
   {
-    name: 'United States',
+    name: 'United States - X',
     code: 'USX',
     pool: 'USAX',
     poolType: 'Main Pool',
@@ -903,7 +903,7 @@ export const poolXCountries = [
     isCustomCode: true,
   },
   {
-    name: 'United States - X',
+    name: 'United States',
     code: 'US',
     pool: 'geox',
     poolType: 'Backup Pool',
@@ -1008,7 +1008,7 @@ export const poolXCountries = [
     isCustomCode: false,
   },
   {
-    name: 'Germany',
+    name: 'Germany - X',
     code: 'DEX',
     pool: 'DEX',
     poolType: 'Main Pool',
@@ -1092,7 +1092,7 @@ export const poolXCountries = [
     isCustomCode: false,
   },
   {
-    name: 'Netherlands',
+    name: 'Netherlands - X',
     code: 'NLX',
     pool: 'NLX',
     poolType: 'Main Pool',
@@ -1309,7 +1309,7 @@ export const poolXCountries = [
     isCustomCode: true,
   },
   {
-    name: 'Germany - X',
+    name: 'Germany',
     code: 'DE',
     pool: 'geoxeu',
     poolType: 'Backup Pool',
@@ -1386,7 +1386,7 @@ export const poolXCountries = [
     isCustomCode: true,
   },
   {
-    name: 'Netherlands - X',
+    name: 'Netherlands',
     code: 'NL',
     pool: 'geoxeu',
     poolType: 'Backup Pool',
