@@ -1,3 +1,5 @@
+import { AuthType } from '../../@types';
+
 export const oxylabsCountryRegions = {
   us: [
     { country: 'USA', code: 'US' },
@@ -48,15 +50,56 @@ export const oxylabsCountryRegions = {
 export const formatHostAndPort = (input: {
   country: string;
   host: string;
-  euHost: string;
-  port: number;
-  euPort: number;
+  euHost?: string;
+  asiaHost?: string;
+  socksHost?: string;
+  socksEuHost?: string;
+  socksAsiaHost?: string;
+  port?: number;
+  euPort?: number;
+  asiaPort?: number;
+  socksPort?: number;
+  socksEuPort?: number;
+  socksAsiaPort?: number;
+  authType: AuthType | undefined;
 }) => {
-  const { country, host, euHost, port, euPort } = input;
+  const {
+    country,
+    host,
+    euHost,
+    asiaHost,
+    socksHost,
+    socksEuHost,
+    socksAsiaHost,
+    port,
+    euPort,
+    asiaPort,
+    socksPort,
+    socksEuPort,
+    socksAsiaPort,
+    authType,
+  } = input;
   const isEuCountry = oxylabsCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
+    if (authType === AuthType.SOCKS5) {
+      return { host: socksEuHost, port: socksEuPort };
+    }
     return { host: euHost, port: euPort };
   }
+
+  const isAsiaCountry = oxylabsCountryRegions.asia.find((rgn) => rgn.code.toLowerCase() === country);
+
+  if (isAsiaCountry) {
+    if (authType === AuthType.SOCKS5) {
+      return { host: socksAsiaHost, port: socksAsiaPort };
+    }
+    return { host: asiaHost, port: asiaPort };
+  }
+
+  if (authType === AuthType.SOCKS5) {
+    return { host: socksHost, port: socksPort };
+  }
+
   return { host, port };
 };

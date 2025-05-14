@@ -1,5 +1,5 @@
 import { generateOxylabsRotatingProxies, generateOxylabsStickyProxies } from '..';
-import { ProxyFormat } from '../../../@types';
+import { AuthType, ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -38,6 +38,28 @@ describe('Generate Oxylabs Proxies', () => {
       });
 
       expectStickyProxy(proxy, ['testhosteu.test', '7778', 'testuname', 'testpw-cc-gr-sessid']);
+    });
+
+    it('should generate a sticky proxy for country belongs to asia region', () => {
+      const proxy = generateOxylabsStickyProxies({
+        ...commonConfig,
+        country: 'JP',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expectStickyProxy(proxy, ['testhostasia.test', '7779', 'testuname', 'testpw-cc-jp-sessid']);
+    });
+
+    it('should generate a socks sticky proxy for country belongs to eu region', () => {
+      const proxy = generateOxylabsStickyProxies({
+        ...commonConfig,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksEuHost: 'socksoxyeu',
+        authType: AuthType.SOCKS5,
+      });
+
+      expectStickyProxy(proxy, ['socksoxyeu.test', '7781', 'testuname', 'testpw-cc-gr-sessid']);
     });
   });
 
@@ -80,6 +102,18 @@ describe('Generate Oxylabs Proxies', () => {
       });
 
       expect(proxy).toEqual('testhosteu.test:7778:testuname:testpw-cc-gr');
+    });
+
+    it('should generate a socks rotating proxy in DEFAULT format for country belongs to eu region', () => {
+      const proxy = generateOxylabsRotatingProxies({
+        ...commonConfig,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+        authType: AuthType.SOCKS5,
+        socksEuHost: 'socskoxyeu',
+      });
+
+      expect(proxy).toEqual('socskoxyeu.test:7781:testuname:testpw-cc-gr');
     });
   });
 });

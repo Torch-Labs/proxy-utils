@@ -1205,8 +1205,8 @@ export const poolXCountries = [
   },
   {
     name: 'United Kingdom',
-    code: 'GBX',
-    pool: 'UKX',
+    code: 'GB',
+    pool: 'geoxeu',
     poolType: 'Main Pool',
     isCustomCode: true,
   },
@@ -1471,8 +1471,8 @@ export const poolXCountries = [
   },
   {
     name: 'United Kingdom - X',
-    code: 'GB',
-    pool: 'geoxeu',
+    code: 'GBX',
+    pool: 'UKX',
     poolType: 'Backup Pool',
     isCustomCode: false,
   },
