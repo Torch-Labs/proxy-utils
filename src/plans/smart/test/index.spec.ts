@@ -1,5 +1,5 @@
 import { generateSmartRotatingProxies, generateSmartStickyProxies } from '..';
-import { ProxyFormat } from '../../../@types';
+import { AuthType, ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -80,6 +80,18 @@ describe('Generate Smart Proxies', () => {
       });
 
       expect(proxy).toEqual('testhosteu.test:7002:testuname:testpw-cc-gr');
+    });
+
+    it('should generate a socks rotating proxy in DEFAULT format for country belongs to eu region', () => {
+      const proxy = generateSmartRotatingProxies({
+        ...commonConfig,
+        country: 'GR',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksEuHost: 'sockssmrteu',
+        authType: AuthType.SOCKS5,
+      });
+
+      expect(proxy).toEqual('sockssmrteu.test:7005:testuname:testpw-cc-gr');
     });
   });
 });
