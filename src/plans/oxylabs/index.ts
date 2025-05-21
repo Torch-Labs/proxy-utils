@@ -42,6 +42,7 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
 
   const proxyEuHost = euHost ? euHost : `${host}eu`;
   const proxyAsiaHost = asiaHost ? asiaHost : `${host}asia`;
+
   const proxySocksEuHost = socksEuHost ? socksEuHost : `${socksHost}eu`;
   const proxyAsiaSocksHost = socksAsiaHost ? socksAsiaHost : `${socksHost}asia`;
 
