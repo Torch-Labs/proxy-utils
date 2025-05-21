@@ -1,3 +1,5 @@
+import { AuthType } from '../../@types';
+
 export const brightdataCountryRegions = {
   us: [
     { code: 'CA', country: 'Canada' },
@@ -113,18 +115,50 @@ export const formatHostAndPort = (input: {
   port: number;
   euPort: number;
   asiaPort: number;
+  socksHost?: string;
+  socksEuHost?: string;
+  socksAsiaHost?: string;
+  socksPort?: number;
+  socksEuPort?: number;
+  socksAsiaPort?: number;
+  authType: AuthType | undefined;
 }) => {
-  const { country, host, euHost, asiaHost, port, euPort, asiaPort } = input;
+  const {
+    country,
+    host,
+    euHost,
+    asiaHost,
+    port,
+    euPort,
+    asiaPort,
+    socksPort,
+    socksEuPort,
+    socksAsiaPort,
+    socksHost,
+    socksEuHost,
+    socksAsiaHost,
+    authType,
+  } = input;
   const isEuCountry = brightdataCountryRegions.eu.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isEuCountry) {
+    if (authType === AuthType.SOCKS5) {
+      return { host: socksEuHost, port: socksEuPort };
+    }
     return { host: euHost, port: euPort };
   }
 
   const isAsiaCountry = brightdataCountryRegions.asia.find((rgn) => rgn.code.toLowerCase() === country);
 
   if (isAsiaCountry) {
+    if (authType === AuthType.SOCKS5) {
+      return { host: socksAsiaHost, port: socksAsiaPort };
+    }
     return { host: asiaHost, port: asiaPort };
+  }
+
+  if (authType === AuthType.SOCKS5) {
+    return { host: socksHost, port: socksPort };
   }
 
   return { host, port };
