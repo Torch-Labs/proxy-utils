@@ -60,6 +60,7 @@ export const ProxyGenerationPlansConstant = {
   IPROYAL: 'IPROYAL',
   GEONODE: 'GEONODE',
   PLANX: 'PLANX',
+  NETNUT: 'NETNUT',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
