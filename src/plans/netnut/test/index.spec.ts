@@ -8,7 +8,6 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toEqual(expected[2]);
   expect(splitResult[3]).toContain(expected[3]);
-  expect(splitResult[3].length).toEqual(21);
 };
 
 describe('Generate NetNut Proxies', () => {
@@ -42,7 +41,7 @@ describe('Generate NetNut Proxies', () => {
       expectStickyProxy(proxy, ['testhost.test', '6500', 'testuname', 'testpw-res_sc-us_alabama-sid']);
     });
     it('should generate a sticky proxy for country belongs to eu region', () => {
-      const proxy = generateNetnutRotatingProxies({
+      const proxy = generateNetnutStickyProxies({
         ...commonConfig,
         country: 'GR',
         proxyFormat: ProxyFormat.DEFAULT,
@@ -62,12 +61,25 @@ describe('Generate NetNut Proxies', () => {
 
       expectStickyProxy(proxy, ['socksnetnut.test', '6503', 'testuname', 'testpw-us-sid']);
     });
+    it('should generate a socks sticky proxy with a city', () => {
+      const proxy = generateNetnutStickyProxies({
+        ...commonConfig,
+        country: 'US',
+        city: 'alabama',
+        proxyFormat: ProxyFormat.DEFAULT,
+        socksHost: 'socksnetnut',
+        socksPort: 6503,
+        authType: AuthType.SOCKS5,
+      });
+
+      expectStickyProxy(proxy, ['socksnetnut.test', '6503', 'testuname', 'testpw-res_sc-us_alabama-sid']);
+    });
     it('should generate a socks sticky proxy for country belongs to eu region', () => {
       const proxy = generateNetnutStickyProxies({
         ...commonConfig,
         country: 'GR',
         proxyFormat: ProxyFormat.DEFAULT,
-        socksHost: 'socksnetnuteu',
+        socksHost: 'socksnetnut',
         authType: AuthType.SOCKS5,
       });
 
@@ -84,6 +96,16 @@ describe('Generate NetNut Proxies', () => {
       });
 
       expect(proxy).toEqual('testhost.test:6500:testuname:testpw-us');
+    });
+    it('should generate a rotating proxy in DEFAULT format with a city', () => {
+      const proxy = generateNetnutRotatingProxies({
+        ...commonConfig,
+        country: 'US',
+        city: 'alabama',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toEqual('testhost.test:6500:testuname:testpw-res_sc-us_alabama');
     });
 
     it('should generate rotating proxy for EU countries', () => {

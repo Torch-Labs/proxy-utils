@@ -64,13 +64,13 @@ export const generateNetnutStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `-${country.toLowerCase()}-sid-${randomString(8)}`;
+  let proxyString = `${country.toLowerCase()}-sid-${randomString(8)}`;
 
   if (city) {
-    proxyString = `-res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomString(8)}`;
+    proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomString(8)}`;
   }
   if (state) {
-    proxyString = `-res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomString(
+    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomString(
       8,
     )}`;
   }
@@ -136,15 +136,13 @@ export const generateNetnutRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `-${country.toLowerCase()}-sid-${randomString(8)}`;
+  let proxyString = `${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `-res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomString(8)}`;
+    proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}`;
   }
   if (state) {
-    proxyString = `-res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomString(
-      8,
-    )}`;
+    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
