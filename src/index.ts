@@ -13,6 +13,7 @@ import { generatePacketstreamRotatingProxies, generatePacketstreamStickyProxies 
 import { generatePlanXRotatingProxies, generatePlanXStickyProxies } from './plans/planx';
 import { generatePrivateRotatingProxies, generatePrivateStickyProxies } from './plans/private-plan';
 import { generateSmartRotatingProxies, generateSmartStickyProxies } from './plans/smart';
+import { generateNetnutRotatingProxies, generateNetnutStickyProxies } from './plans/netnut';
 
 export const generateProxiesForPlan = (
   config: ProxyGenerationConfig,
@@ -60,6 +61,11 @@ export const generateProxiesForPlan = (
       return generateProxies(config, amount, type, {
         rotatingGenerationFn: generatePlanXRotatingProxies,
         stickyGenerationFn: generatePlanXStickyProxies,
+      });
+    case ProxyGenerationPlansConstant.NETNUT:
+      return generateProxies(config, amount, type, {
+        rotatingGenerationFn: generateNetnutRotatingProxies,
+        stickyGenerationFn: generateNetnutStickyProxies,
       });
     default:
       throw new Error('Not implemented');
