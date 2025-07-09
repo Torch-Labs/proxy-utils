@@ -28,7 +28,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '6500', 'testuname', 'testpw-us-sid']);
+      expectStickyProxy(proxy, ['testhost.test', '6500', 'testuname', 'testpw-res-us-sid']);
     });
     it('should generate a sticky proxy for a city', () => {
       const proxy = generateNetnutStickyProxies({
@@ -47,7 +47,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhosteu.test', '6501', 'testuname', 'testpw-gr-sid']);
+      expectStickyProxy(proxy, ['testhosteu.test', '6501', 'testuname', 'testpw-res-gr-sid']);
     });
     it('should generate a socks sticky proxy', () => {
       const proxy = generateNetnutStickyProxies({
@@ -59,7 +59,7 @@ describe('Generate NetNut Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expectStickyProxy(proxy, ['socksnetnut.test', '6503', 'testuname', 'testpw-us-sid']);
+      expectStickyProxy(proxy, ['socksnetnut.test', '6503', 'testuname', 'testpw-res-us-sid']);
     });
     it('should generate a socks sticky proxy with a city', () => {
       const proxy = generateNetnutStickyProxies({
@@ -83,7 +83,7 @@ describe('Generate NetNut Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expectStickyProxy(proxy, ['socksnetnuteu.test', '6504', 'testuname', 'testpw-gr-sid']);
+      expectStickyProxy(proxy, ['socksnetnuteu.test', '6504', 'testuname', 'testpw-res-gr-sid']);
     });
   });
 
@@ -95,7 +95,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:6500:testuname:testpw-us');
+      expect(proxy).toEqual('testhost.test:6500:testuname:testpw-res-us');
     });
     it('should generate a rotating proxy in DEFAULT format with a city', () => {
       const proxy = generateNetnutRotatingProxies({
@@ -116,7 +116,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testeu.test:6501:testuname:testpw-de');
+      expect(proxy).toEqual('testeu.test:6501:testuname:testpw-res-de');
     });
 
     it('should generate a rotating proxy in FORMAT_1 format', () => {
@@ -126,7 +126,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_1,
       });
 
-      expect(proxy).toEqual('testuname:testpw-us:testhost.test:6500');
+      expect(proxy).toEqual('testuname:testpw-res-us:testhost.test:6500');
     });
 
     it('should generate a rotating proxy in FORMAT_2 format', () => {
@@ -136,7 +136,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_2,
       });
 
-      expect(proxy).toEqual('testuname:testpw-us@testhost.test:6500');
+      expect(proxy).toEqual('testuname:testpw-res-us@testhost.test:6500');
     });
 
     it('should generate a rotating proxy in DEFAULT format for country belongs to eu region', () => {
@@ -146,7 +146,7 @@ describe('Generate NetNut Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhosteu.test:6501:testuname:testpw-gr');
+      expect(proxy).toEqual('testhosteu.test:6501:testuname:testpw-res-gr');
     });
     it('should generate a socks sticky proxy for country belongs to eu region', () => {
       const proxy = generateNetnutRotatingProxies({
@@ -157,7 +157,7 @@ describe('Generate NetNut Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expect(proxy).toEqual('socksnetnuteu.test:6504:testuname:testpw-gr');
+      expect(proxy).toEqual('socksnetnuteu.test:6504:testuname:testpw-res-gr');
     });
   });
 });

@@ -64,7 +64,7 @@ export const generateNetnutStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `${country.toLowerCase()}-sid-${randomString(8)}`;
+  let proxyString = `res-${country.toLowerCase()}-sid-${randomString(8)}`;
 
   if (city) {
     proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomString(8)}`;
@@ -136,7 +136,7 @@ export const generateNetnutRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `${country.toLowerCase()}`;
+  let proxyString = `res-${country.toLowerCase()}`;
 
   if (city) {
     proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}`;
