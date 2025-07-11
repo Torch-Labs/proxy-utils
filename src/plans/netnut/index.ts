@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomNumberString, randomString } from '../../utils';
+import { formatProxyString, randomNumberString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 const DEFAULT_NETNUT_PORT = 6500;
