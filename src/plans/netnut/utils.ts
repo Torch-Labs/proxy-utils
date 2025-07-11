@@ -50,7 +50,7 @@ export const netNutCountryregions = {
     { code: 'SK', country: 'Slovakia' },
     { code: 'SM', country: 'San Marino' },
     { code: 'UA', country: 'Ukraine' },
-    { code: 'GB', country: 'United Kingdom' },
+    { code: 'UK', country: 'United Kingdom' },
     { code: 'JE', country: 'Jersey' },
     { code: 'GG', country: 'Guernsey' },
     { code: 'IM', country: 'Isle of Man' },
