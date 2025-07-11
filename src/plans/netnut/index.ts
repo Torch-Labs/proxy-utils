@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomString } from '../../utils';
+import { formatProxyString, randomNumberString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 const DEFAULT_NETNUT_PORT = 6500;
@@ -64,13 +64,13 @@ export const generateNetnutStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `res-${country.toLowerCase()}-sid-${randomString(8)}`;
+  let proxyString = `res-${country.toLowerCase()}-sid-${randomNumberString(8)}`;
 
   if (city) {
-    proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomString(8)}`;
+    proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomNumberString(8)}`;
   }
   if (state) {
-    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomString(
+    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomNumberString(
       8,
     )}`;
   }
