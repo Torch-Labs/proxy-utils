@@ -70,7 +70,7 @@ export const generatePacketstreamStickyProxies = (input: ProxyConfig) => {
   const part1 = `${proxyHost}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}-country-${country}_session-${randomString(7)}`;
+  const part4 = `${password}-country-${country.toLowerCase()}-session-${randomString(7)}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
@@ -136,7 +136,7 @@ export const generatePacketstreamRotatingProxies = (input: ProxyConfig) => {
   const part1 = `${proxyHost}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}-country-${country}`;
+  const part4 = `${password}-country-${country.toLowerCase()}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };

@@ -8,8 +8,8 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[0]).toEqual(expected[0]);
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toEqual(expected[2]);
-  expect(splitResult[3].slice(0, 33)).toEqual(expected[3]);
-  expect(splitResult[3].slice(33, 40).length).toEqual(7);
+  expect(splitResult[3].slice(0, 28)).toEqual(expected[3]);
+  expect(splitResult[3].slice(28, 35).length).toEqual(7);
 };
 
 describe('Proxy Generation Utils', () => {
@@ -19,7 +19,7 @@ describe('Proxy Generation Utils', () => {
         host: 'host',
         username: 'username',
         password: 'password',
-        country: 'country',
+        country: 'US',
         domain: 'domain',
         port: 1234,
         proxyFormat: ProxyFormat.DEFAULT,
@@ -31,7 +31,7 @@ describe('Proxy Generation Utils', () => {
 
       console.log(result);
 
-      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-country-country_session-']);
+      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-country-us-session-']);
     });
 
     it('should generate a rotating proxy', () => {
