@@ -31,7 +31,7 @@ describe('Proxy Generation Utils', () => {
 
       console.log(result);
 
-      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-country-us-session-']);
+      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-sticky-country-us-session-']);
     });
 
     it('should generate a rotating proxy', () => {
@@ -44,7 +44,7 @@ describe('Proxy Generation Utils', () => {
         port: 1234,
         proxyFormat: ProxyFormat.DEFAULT,
       };
-      const expected = 'host.domain:1234:username:password-country-country';
+      const expected = 'host.domain:1234:username:password-rot-country-country';
       const result = generateProxyForType(input, ProxyGenerationTypesConstant.ROTATING, {
         rotatingGenerationFn: generatePacketstreamRotatingProxies,
         stickyGenerationFn: generatePacketstreamStickyProxies,
@@ -66,9 +66,9 @@ describe('Proxy Generation Utils', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
-        'host.domain:1234:username:password-country-country',
-        'host.domain:1234:username:password-country-country',
-        'host.domain:1234:username:password-country-country',
+        'host.domain:1234:username:password-rot-country-country',
+        'host.domain:1234:username:password-rot-country-country',
+        'host.domain:1234:username:password-rot-country-country',
       ];
       const result = generateProxies(input, 3, ProxyGenerationTypesConstant.ROTATING, {
         rotatingGenerationFn: generatePacketstreamRotatingProxies,
@@ -89,12 +89,12 @@ describe('Proxy Generation Utils', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
-        'host.domain:1234:username:password-country-country1',
-        'host.domain:1234:username:password-country-country2',
-        'host.domain:1234:username:password-country-country3',
-        'host.domain:1234:username:password-country-country1',
-        'host.domain:1234:username:password-country-country2',
-        'host.domain:1234:username:password-country-country3',
+        'host.domain:1234:username:password-rot-country-country1',
+        'host.domain:1234:username:password-rot-country-country2',
+        'host.domain:1234:username:password-rot-country-country3',
+        'host.domain:1234:username:password-rot-country-country1',
+        'host.domain:1234:username:password-rot-country-country2',
+        'host.domain:1234:username:password-rot-country-country3',
       ];
       const result = generateProxies(input, 6, ProxyGenerationTypesConstant.ROTATING, {
         rotatingGenerationFn: generatePacketstreamRotatingProxies,
@@ -115,13 +115,13 @@ describe('Proxy Generation Utils', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       };
       const expected = [
-        'host.domain:1234:username:password-country-country1',
-        'host.domain:1234:username:password-country-country2',
-        'host.domain:1234:username:password-country-country3',
-        'host.domain:1234:username:password-country-country1',
-        'host.domain:1234:username:password-country-country2',
-        'host.domain:1234:username:password-country-country3',
-        'host.domain:1234:username:password-country-country1',
+        'host.domain:1234:username:password-rot-country-country1',
+        'host.domain:1234:username:password-rot-country-country2',
+        'host.domain:1234:username:password-rot-country-country3',
+        'host.domain:1234:username:password-rot-country-country1',
+        'host.domain:1234:username:password-rot-country-country2',
+        'host.domain:1234:username:password-rot-country-country3',
+        'host.domain:1234:username:password-rot-country-country1',
       ];
       const result = generateProxies(input, 7, ProxyGenerationTypesConstant.ROTATING, {
         rotatingGenerationFn: generatePacketstreamRotatingProxies,
