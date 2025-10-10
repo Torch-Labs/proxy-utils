@@ -8,8 +8,8 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[0]).toEqual(expected[0]);
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toEqual(expected[2]);
-  expect(splitResult[3].slice(0, 28)).toEqual(expected[3]);
-  expect(splitResult[3].slice(28, 35).length).toEqual(7);
+  expect(splitResult[3].slice(0, 35)).toEqual(expected[3]);
+  expect(splitResult[3].slice(35, 42).length).toEqual(7);
 };
 
 describe('Proxy Generation Utils', () => {
