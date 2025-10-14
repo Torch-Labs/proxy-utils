@@ -1,6 +1,6 @@
 {
   "name": "@torchlabs/proxy-utils",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "license": "MIT",
   "devDependencies": {
     "prettier": "^2.7.1",
