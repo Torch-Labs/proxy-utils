@@ -47,6 +47,12 @@ describe('Generate PlanX Proxies', () => {
 
       expect(result).toEqual('geox.x.proxiess.com:6011:testuname:testpw-country-us');
     });
+    it('should generate a sticky proxy (DEFAULT format) for country LU', () => {
+      const input = { ...commonConfig, country: 'LU', proxyFormat: ProxyFormat.DEFAULT };
+      const result = generatePlanXRotatingProxies(input);
+
+      expect(result).toEqual('geoxeu.x.proxiess.com:6012:testuname:testpw-country-lu');
+    });
     it('should generate a sticky proxy (DEFAULT format) for country Australia - X', () => {
       const input = { ...commonConfig, country: 'AUX', proxyFormat: ProxyFormat.DEFAULT };
       const result = generatePlanXRotatingProxies(input);

@@ -1064,6 +1064,13 @@ export const poolXCountries = [
     isCustomCode: false,
   },
   {
+    name: 'Luxembourg',
+    code: 'LU',
+    pool: 'geoxeu',
+    poolType: 'Main Pool',
+    isCustomCode: false,
+  },
+  {
     name: 'Macedonia',
     code: 'MK',
     pool: 'geoxeu',
