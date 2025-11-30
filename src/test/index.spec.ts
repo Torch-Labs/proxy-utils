@@ -1198,7 +1198,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /geox.x.proxiess.com:6011:testuser:testpw-country-us_session-.{8}/g;
+        const re = /geox.x.proxiess.com:6011:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -1239,7 +1239,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /usax.x.proxiess.com:6000:testuser:testpw-country-usx_session-.{8}/g;
+        const re = /usax.x.proxiess.com:6000:testuser:testpw-country-usx-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
