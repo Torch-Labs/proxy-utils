@@ -71,21 +71,21 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
   }
 
   if (state) {
-    proxyString = `state-${country.toLowerCase()}_${state}_sessionid-${randomNumberString(8)}`;
+    proxyString = `state-${country.toLowerCase()}_${state}-sessionid-${randomNumberString(8)}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+      proxyString += ``;
     } else {
-      proxyString += `_lifetime-${sessionDuration}m`;
+      proxyString += ``;
     }
   } else {
-    proxyString += `_lifetime-1h`;
+    proxyString += ``;
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += ``;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -160,7 +160,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += ``;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
