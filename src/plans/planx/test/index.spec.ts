@@ -23,21 +23,21 @@ describe('Generate PlanX Proxies', () => {
       const input = { ...commonConfig, country: 'US', proxyFormat: ProxyFormat.DEFAULT };
       const result = generatePlanXStickyProxies(input);
 
-      expectStickyProxy(result, ['geox.x.proxiess.com', '6011', 'testuname', 'testpw-country-us_session-']);
+      expectStickyProxy(result, ['geox.x.proxiess.com', '6011', 'testuname', 'testpw-country-us-sessionid-']);
     });
 
     it('should generate a sticky proxy (DEFAULT format) for country Australia - X', () => {
       const input = { ...commonConfig, country: 'AUX', proxyFormat: ProxyFormat.DEFAULT };
       const result = generatePlanXStickyProxies(input);
 
-      expectStickyProxy(result, ['aux.x.proxiess.com', '6002', 'testuname', 'testpw-country-aux_session-']);
+      expectStickyProxy(result, ['aux.x.proxiess.com', '6002', 'testuname', 'testpw-country-aux-sessionid-']);
     });
 
     it('should generate a sticky proxy (DEFAULT format) for country Spain - X', () => {
       const input = { ...commonConfig, country: 'ESX', proxyFormat: ProxyFormat.DEFAULT };
       const result = generatePlanXStickyProxies(input);
 
-      expectStickyProxy(result, ['ukx.x.proxiess.com', '6003', 'testuname', 'testpw-country-esx_session-']);
+      expectStickyProxy(result, ['ukx.x.proxiess.com', '6003', 'testuname', 'testpw-country-esx-sessionid-']);
     });
   });
   describe('generateRotatingProxies()', () => {

@@ -769,7 +769,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.IPROYAL,
       );
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us_session-.{8}/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -790,7 +790,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.IPROYAL,
       );
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us_session-.{8}/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -812,7 +812,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.IPROYAL,
       );
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us_session-.{8}_lifetime-30m/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -834,7 +834,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.IPROYAL,
       );
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us_session-.{8}_lifetime-2h/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -857,7 +857,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw-country-us_state-texas');
+        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw-state-us_texas');
       });
     });
 
@@ -879,7 +879,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-us_state-texas_session-.{8}/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-state-us_texas-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -931,7 +931,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /testhost.iproyal.com:12323:testuser:testpw-country-(us|ca|mx)_session-.{8}/g;
+        const re = /testhost.iproyal.com:12323:testuser:testpw-country-(us|ca|mx)-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -954,7 +954,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw-country-us_streaming-1');
+        expect(proxy).toEqual('testhost.iproyal.com:12323:testuser:testpw-country-us');
       });
     });
   });
@@ -1198,7 +1198,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /geox.x.proxiess.com:6011:testuser:testpw-country-us_session-.{8}/g;
+        const re = /geox.x.proxiess.com:6011:testuser:testpw-country-us-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -1239,7 +1239,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /usax.x.proxiess.com:6000:testuser:testpw-country-usx_session-.{8}/g;
+        const re = /usax.x.proxiess.com:6000:testuser:testpw-country-usx-sessionid-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });

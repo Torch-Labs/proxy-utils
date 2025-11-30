@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomString } from '../../utils';
+import { formatProxyString, randomNumberString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 const DEFAULT_IPROYAL_PORT = 12321;
@@ -64,28 +64,28 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}-sessionid-${randomNumberString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
+    proxyString = `city-${country.toLowerCase()}_${city}-sessionid-${randomNumberString(8)}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
+    proxyString = `state-${country.toLowerCase()}_${state}-sessionid-${randomNumberString(8)}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+      proxyString += ``;
     } else {
-      proxyString += `_lifetime-${sessionDuration}m`;
+      proxyString += ``;
     }
   } else {
-    proxyString += `_lifetime-1h`;
+    proxyString += ``;
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += ``;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -152,15 +152,15 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}`;
+    proxyString = `city-${country.toLowerCase()}_${city}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}_state-${state}`;
+    proxyString = `state-${country.toLowerCase()}_${state}`;
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += ``;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
