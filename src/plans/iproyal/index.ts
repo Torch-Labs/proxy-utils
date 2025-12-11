@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomNumberString } from '../../utils';
+import { formatProxyString, randomNumberString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 const DEFAULT_IPROYAL_PORT = 12321;
@@ -64,28 +64,28 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}-sessionid-${randomNumberString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `city-${country.toLowerCase()}_${city}-sessionid-${randomNumberString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `state-${country.toLowerCase()}_${state}-sessionid-${randomNumberString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += ``;
+      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
     } else {
-      proxyString += ``;
+      proxyString += `_lifetime-${sessionDuration}m`;
     }
   } else {
-    proxyString += ``;
+    proxyString += `_lifetime-1h`;
   }
 
   if (streaming) {
-    proxyString += ``;
+    proxyString += `_streaming-1`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -152,15 +152,15 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `city-${country.toLowerCase()}_${city}`;
+    proxyString = `country-${country.toLowerCase()}_${city}`;
   }
 
   if (state) {
-    proxyString = `state-${country.toLowerCase()}_${state}`;
+    proxyString = `country-${country.toLowerCase()}_${state}`;
   }
 
   if (streaming) {
-    proxyString += ``;
+    proxyString += `_streaming-1`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
