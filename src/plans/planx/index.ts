@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomNumberString } from '../../utils';
+import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 export const generatePlanXStickyProxies = (input: ProxyConfig) => {
@@ -7,28 +7,28 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
 
   const { host, port, domain } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
 
-  let proxyString = `country-${country.toLowerCase()}-sessionid-${randomNumberString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `city-${country.toLowerCase()}_${city}-sessionid-${randomNumberString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `state-${country.toLowerCase()}_${state}-sessionid-${randomNumberString(8)}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += ``;
+      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
     } else {
-      proxyString += ``;
+      proxyString += `_lifetime-${sessionDuration}m`;
     }
   } else {
-    proxyString += ``;
+    proxyString += `_lifetime-1h`;
   }
 
   if (streaming) {
-    proxyString += ``;
+    proxyString += `_streaming-1`;
   }
   const part1 = `${host}.${domain}`;
   const part2 = `${port}`;
@@ -46,15 +46,15 @@ export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `city-${country.toLowerCase()}_${city}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}`;
   }
 
   if (state) {
-    proxyString = `state-${country.toLowerCase()}_${state}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}`;
   }
 
   if (streaming) {
-    proxyString += ``;
+    proxyString += `_streaming-1`;
   }
   const part1 = `${host}.${domain}`;
   const part2 = `${port}`;
