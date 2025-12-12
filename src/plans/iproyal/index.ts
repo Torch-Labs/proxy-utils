@@ -156,7 +156,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}_${state}`;
+    proxyString = `country-${country.toLowerCase()}_state-${state}`;
   }
 
   if (streaming) {
