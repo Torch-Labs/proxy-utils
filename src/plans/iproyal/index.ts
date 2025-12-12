@@ -152,7 +152,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_${city}`;
+    proxyString = `country-${country.toLowerCase()}_city-${city}`;
   }
 
   if (state) {
