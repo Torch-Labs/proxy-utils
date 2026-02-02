@@ -16,6 +16,7 @@ export type DefualtProxyConfig = {
   socksAsiaPort?: number;
   state?: string;
   city?: string;
+  deviceType?: string;
   sessionDuration?: number;
   ssl?: boolean;
   streaming?: boolean;
