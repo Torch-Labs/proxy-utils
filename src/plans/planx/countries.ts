@@ -744,7 +744,7 @@ export const poolXCountries = [
   {
     name: 'Canada - X',
     code: 'CAX',
-    pool: 'USAX',
+    pool: 'CAX',
     poolType: 'Backup Pool',
     isCustomCode: true,
   },
