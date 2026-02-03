@@ -23,6 +23,7 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     username,
     state,
     city,
+    deviceType,
     sessionDuration,
     proxyFormat,
     port,
@@ -88,6 +89,10 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     proxyString += `_streaming-1`;
   }
 
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
+  }
+
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
@@ -110,6 +115,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
     username,
     city,
     state,
+    deviceType,
     proxyFormat,
     port,
     euPort,
@@ -161,6 +167,10 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
 
   if (streaming) {
     proxyString += `_streaming-1`;
+  }
+
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;

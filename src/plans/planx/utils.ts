@@ -58,6 +58,11 @@ export const defaultPoolConfig = [
     port: 6010,
   },
   {
+    name: 'CAX',
+    host: 'cax',
+    port: 6017,
+  },
+  {
     name: 'geox',
     host: 'geox',
     port: 6011,

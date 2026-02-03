@@ -70,9 +70,13 @@ export const generateNetnutStickyProxies = (input: ProxyConfig) => {
     proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}-sid-${randomNumberString(8)}`;
   }
   if (state) {
-    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}-sid-${randomNumberString(
-      8,
-    )}`;
+    if (city) {
+      proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city.toLowerCase()}-sid-${randomNumberString(
+        8,
+      )}`;
+    } else {
+      proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}-sid-${randomNumberString(8)}`;
+    }
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -141,8 +145,13 @@ export const generateNetnutRotatingProxies = (input: ProxyConfig) => {
   if (city) {
     proxyString = `res_sc-${country.toLowerCase()}_${city.toLowerCase()}`;
   }
+
   if (state) {
-    proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city?.toLowerCase()}`;
+    if (city) {
+      proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}_${city.toLowerCase()}`;
+    } else {
+      proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}`;
+    }
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
