@@ -77,14 +77,14 @@ export const generateNetnutStickyProxies = (input: ProxyConfig) => {
     } else {
       proxyString = `res_sc-${country.toLowerCase()}_${state.toLowerCase()}-sid-${randomNumberString(8)}`;
     }
-
-    const part1 = `${formattedHostAndConfig.host}.${domain}`;
-    const part2 = `${formattedHostAndConfig.port}`;
-    const part3 = `${username}`;
-    const part4 = `${password}-${proxyString}`;
-
-    return formatProxyString({ part1, part2, part3, part4, proxyFormat });
   }
+
+  const part1 = `${formattedHostAndConfig.host}.${domain}`;
+  const part2 = `${formattedHostAndConfig.port}`;
+  const part3 = `${username}`;
+  const part4 = `${password}-${proxyString}`;
+
+  return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
 
 export const generateNetnutRotatingProxies = (input: ProxyConfig) => {
