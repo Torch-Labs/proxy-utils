@@ -63,6 +63,7 @@ export const generateProxies = (
     socksStickyPort: config.socksStickyPort,
     socksRotatingPort: config.socksRotatingPort,
     poolConfig: config.poolConfig,
+    deviceType: config.deviceType,
   };
 
   for (let i = 0; i < proxyAmount; i++) {
