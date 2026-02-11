@@ -3,7 +3,8 @@ import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 export const generatePlanXStickyProxies = (input: ProxyConfig) => {
-  const { country, poolConfig, username, password, sessionDuration, city, state, streaming, proxyFormat } = input;
+  const { country, poolConfig, username, password, sessionDuration, city, state, deviceType, streaming, proxyFormat } =
+    input;
 
   const { host, port, domain } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
 
@@ -30,6 +31,10 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
   if (streaming) {
     proxyString += `_streaming-1`;
   }
+
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
+  }
   const part1 = `${host}.${domain}`;
   const part2 = `${port}`;
   const part3 = `${username}`;
@@ -39,7 +44,7 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
-  const { country, poolConfig, username, password, city, state, streaming, proxyFormat } = input;
+  const { country, poolConfig, username, password, city, state, deviceType, streaming, proxyFormat } = input;
 
   const { host, port, domain, isCustom } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
 
@@ -56,6 +61,11 @@ export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
   if (streaming) {
     proxyString += `_streaming-1`;
   }
+
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
+  }
+
   const part1 = `${host}.${domain}`;
   const part2 = `${port}`;
   const part3 = `${username}`;
