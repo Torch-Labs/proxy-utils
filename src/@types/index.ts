@@ -62,6 +62,7 @@ export const ProxyGenerationPlansConstant = {
   GEONODE: 'GEONODE',
   PLANX: 'PLANX',
   NETNUT: 'NETNUT',
+  TL_GEO_V2: 'TL_GEO_V2',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
