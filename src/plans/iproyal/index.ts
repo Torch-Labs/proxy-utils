@@ -1,5 +1,5 @@
 import { ProxyConfig } from '../../@types';
-import { formatProxyString, randomNumberString, randomString } from '../../utils';
+import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
 const DEFAULT_IPROYAL_PORT = 12321;
@@ -34,6 +34,8 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     socksAsiaPort,
     authType,
     streaming,
+    staticIps,
+    pawn,
   } = input;
 
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
@@ -88,6 +90,12 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
   if (streaming) {
     proxyString += `_streaming-1`;
   }
+  if (staticIps) {
+    proxyString += `_skipispstatic-1`;
+  }
+  if (pawn) {
+    proxyString += `_direct-1`;
+  }
 
   if (deviceType) {
     proxyString += `_device-${deviceType}`;
@@ -125,6 +133,8 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
     socksAsiaPort,
     streaming,
     authType,
+    staticIps,
+    pawn,
   } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
@@ -167,6 +177,14 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
 
   if (streaming) {
     proxyString += `_streaming-1`;
+  }
+
+  if (staticIps) {
+    proxyString += `_skipispstatic-1`;
+  }
+
+  if (pawn) {
+    proxyString += `_direct-1`;
   }
 
   if (deviceType) {

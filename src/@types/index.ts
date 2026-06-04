@@ -20,6 +20,8 @@ export type DefualtProxyConfig = {
   sessionDuration?: number;
   ssl?: boolean;
   streaming?: boolean;
+  staticIps?: boolean;
+  pawn?: boolean;
   proxyFormat: ProxyFormat;
   authType?: AuthType;
   httpsPort?: number;
