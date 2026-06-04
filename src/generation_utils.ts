@@ -55,6 +55,8 @@ export const generateProxies = (
     sessionDuration: config.sessionDuration,
     ssl: config.ssl,
     streaming: config.streaming,
+    staticIps: config.staticIps,
+    pawn: config.pawn,
     proxyFormat: config.proxyFormat,
     authType: config.authType,
     httpsPort: config.httpsPort,
