@@ -27,7 +27,7 @@ describe('Generate Brightdata Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-country-US-session-']);
+      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-country-us-session']);
     });
 
     it('should generate a socks sticky proxy for country belongs to us region', () => {
@@ -39,7 +39,7 @@ describe('Generate Brightdata Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expectStickyProxy(proxy, ['socksbrd.test', '22228', 'testuname', 'testpw-country-US-session-']);
+      expectStickyProxy(proxy, ['socksbrd.test', '22228', 'testuname', 'testpw-country-us-session']);
     });
 
     it('should generate a socks sticky proxy for country belongs to eu region', () => {
@@ -51,7 +51,7 @@ describe('Generate Brightdata Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expectStickyProxy(proxy, ['socksbrdeu.test', '22229', 'testuname', 'testpw-country-GR-session-']);
+      expectStickyProxy(proxy, ['socksbrdeu.test', '22229', 'testuname', 'testpw-country-gr-session']);
     });
 
     it('should generate a socks sticky proxy for country belongs to asia region', () => {
@@ -63,7 +63,7 @@ describe('Generate Brightdata Proxies', () => {
         authType: AuthType.SOCKS5,
       });
 
-      expectStickyProxy(proxy, ['socksbrdasia.test', '22230', 'testuname', 'testpw-country-JP-session-']);
+      expectStickyProxy(proxy, ['socksbrdasia.test', '22230', 'testuname', 'testpw-country-jp-session']);
     });
   });
 
@@ -75,7 +75,7 @@ describe('Generate Brightdata Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:1234:testuname:testpw-country-US');
+      expect(proxy).toEqual('testhost.test:1234:testuname:testpw-country-us');
     });
 
     it('should generate a rotating proxy in FORMAT_1 format', () => {
@@ -85,7 +85,7 @@ describe('Generate Brightdata Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_1,
       });
 
-      expect(proxy).toEqual('testuname:testpw-country-US:testhost.test:1234');
+      expect(proxy).toEqual('testuname:testpw-country-us:testhost.test:1234');
     });
 
     it('should generate a rotating proxy in FORMAT_2 format', () => {
@@ -95,7 +95,7 @@ describe('Generate Brightdata Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_2,
       });
 
-      expect(proxy).toEqual('testuname:testpw-country-US@testhost.test:1234');
+      expect(proxy).toEqual('testuname:testpw-country-us@testhost.test:1234');
     });
 
     it('should generate a socks rotating proxy in DEFAULT format for country belongs to eu region', () => {
@@ -107,7 +107,7 @@ describe('Generate Brightdata Proxies', () => {
         socksHost: 'socksbrd',
       });
 
-      expect(proxy).toEqual('socksbrd.test:22228:testuname:testpw-country-US');
+      expect(proxy).toEqual('socksbrd.test:22228:testuname:testpw-country-us');
     });
 
     it('should generate a socks rotating proxy in DEFAULT format for country belongs to eu region', () => {
@@ -119,7 +119,7 @@ describe('Generate Brightdata Proxies', () => {
         socksEuHost: 'socksbrdeu',
       });
 
-      expect(proxy).toEqual('socksbrdeu.test:22229:testuname:testpw-country-GR');
+      expect(proxy).toEqual('socksbrdeu.test:22229:testuname:testpw-country-gr');
     });
     it('should generate a socks rotating proxy in DEFAULT format for country belongs to eu region', () => {
       const proxy = generateBrightdataRotatingProxies({
@@ -130,7 +130,7 @@ describe('Generate Brightdata Proxies', () => {
         socksAsiaHost: 'socksbrdasia',
       });
 
-      expect(proxy).toEqual('socksbrdasia.test:22230:testuname:testpw-country-JP');
+      expect(proxy).toEqual('socksbrdasia.test:22230:testuname:testpw-country-jp');
     });
   });
 });
