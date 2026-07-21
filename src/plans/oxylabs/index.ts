@@ -63,20 +63,20 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}-session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(8)}`;
   }
 
   if (sessionDuration) {
     proxyString += `-sesstime-${sessionDuration}`;
   } else {
-    proxyString += `-sesstime-60`;
+    proxyString += ``;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -139,14 +139,14 @@ export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `cc-${country.toLowerCase()}`;
+  let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}`;
   }
 
   if (state) {
-    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
+    proxyString = `country-${country.toLowerCase()}-state-${state}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;

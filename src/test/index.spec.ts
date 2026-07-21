@@ -195,7 +195,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-country-us');
       });
     });
 
@@ -215,7 +215,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-us-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -238,7 +238,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-20/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-us-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -260,7 +260,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-country-us-city-new_york');
       });
     });
 
@@ -281,7 +281,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -304,7 +304,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-20/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -326,7 +326,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california');
+        expect(proxy).toEqual('testhost.oxylabs.io:1234:testuser:testpw-country-us-state-us_california');
       });
     });
 
@@ -347,7 +347,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-us-state-us_california-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -368,17 +368,17 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       expect(result).toEqual([
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-mx',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-us',
-        'testhost.oxylabs.io:1234:testuser:testpw-cc-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-ca',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-mx',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-us',
+        'testhost.oxylabs.io:1234:testuser:testpw-country-ca',
       ]);
     });
 
@@ -398,7 +398,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.OXYLABS,
       );
       result.forEach((proxy) => {
-        const re = /testhost.oxylabs.io:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.oxylabs.io:1234:testuser:testpw-country-(us|ca|mx)-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -421,7 +421,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-cc-us');
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us');
       });
     });
 
@@ -441,7 +441,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -464,7 +464,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-sessid-.{8}-sesstime-20/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -486,7 +486,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-cc-us-city-new_york');
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york');
       });
     });
 
@@ -507,7 +507,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -530,7 +530,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-city-new_york-sessid-.{8}-sesstime-20/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -552,7 +552,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-cc-us-state-us_california');
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us-state-us_california');
       });
     });
 
@@ -573,7 +573,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-us-state-us_california-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-state-us_california-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -594,17 +594,17 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       expect(result).toEqual([
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-us',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-ca',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-mx',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-us',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-ca',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-mx',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-us',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-ca',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-mx',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-us',
-        'testhost.smartproxy.com:1234:testuser:testpw-cc-ca',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-us',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-ca',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-mx',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-us',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-ca',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-mx',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-us',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-ca',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-mx',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-us',
+        'testhost.smartproxy.com:1234:testuser:testpw-country-ca',
       ]);
     });
 
@@ -624,7 +624,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-cc-(us|ca|mx)-sessid-.{8}-sesstime-60/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-(us|ca|mx)-session-.{8}/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
