@@ -14,6 +14,8 @@ export const generateBrightdataStickyProxies = (input: ProxyConfig) => {
     host,
     password,
     country,
+    state,
+    city,
     domain,
     port,
     username,
@@ -29,9 +31,8 @@ export const generateBrightdataStickyProxies = (input: ProxyConfig) => {
     socksAsiaHost,
     socksHost,
     authType,
+    deviceType,
   } = input;
-
-  console.log(socksHost);
 
   const proxyPort = port ?? DEFAULT_BRIGHTDATA_PORT;
   const proxyEuPort = euPort ?? DEFAULT_BRIGHTDATA_EU_PORT;
@@ -51,25 +52,37 @@ export const generateBrightdataStickyProxies = (input: ProxyConfig) => {
     host: host,
     euHost: proxyEuHost,
     asiaHost: proxyAsiaHost,
-    port: proxyPort,
-    euPort: proxyEuPort,
-    asiaPort: proxyAsiaPort,
-    country: country.toLowerCase(),
     socksHost: socksHost,
     socksEuHost: proxySocksEuHost,
     socksAsiaHost: proxyAsiaSocksHost,
+    port: proxyPort,
+    euPort: proxyEuPort,
+    asiaPort: proxyAsiaPort,
     socksPort: proxySocksPort,
     socksEuPort: proxyEuSocksPort,
     socksAsiaPort: proxyAsiaSocksPort,
+    country: country.toLowerCase(),
     authType,
   });
 
-  console.log(formattedHostAndConfig.port);
+  let proxyString = `country-${country.toLowerCase()}-session-${randomString(15)}`;
+
+  if (city) {
+    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(15)}`;
+  }
+
+  if (state) {
+    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(15)}`;
+  }
+
+  if (deviceType) {
+    proxyString += `-os-${deviceType}`;
+  }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}-country-${country}-session-${randomString(15)}`;
+  const part4 = `${password}-${proxyString}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
@@ -79,6 +92,8 @@ export const generateBrightdataRotatingProxies = (input: ProxyConfig) => {
     host,
     password,
     country,
+    state,
+    city,
     domain,
     port,
     username,
@@ -94,6 +109,7 @@ export const generateBrightdataRotatingProxies = (input: ProxyConfig) => {
     socksEuPort,
     socksAsiaPort,
     authType,
+    deviceType,
   } = input;
 
   const proxyPort = port ?? DEFAULT_BRIGHTDATA_PORT;
@@ -127,10 +143,24 @@ export const generateBrightdataRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
+  let proxyString = `country-${country.toLowerCase()}`;
+
+  if (city) {
+    proxyString = `country-${country.toLowerCase()}-city-${city}`;
+  }
+
+  if (state) {
+    proxyString = `country-${country.toLowerCase()}-state-${state}`;
+  }
+
+  if (deviceType) {
+    proxyString += `-os-${deviceType}`;
+  }
+
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
-  const part4 = `${password}-country-${country}`;
+  const part4 = `${password}-${proxyString}`;
 
   return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
