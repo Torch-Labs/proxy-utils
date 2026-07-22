@@ -32,6 +32,7 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
     sessionDuration,
     proxyFormat,
     authType,
+    deviceType,
   } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
   const proxyEuPort = euPort ?? DEFAULT_ELITE_EU_PORT;
@@ -63,20 +64,28 @@ export const generateOxylabsStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}-session-${randomString(8)}`;
+  let proxyString = `cc-${country.toUpperCase()}-sessid-${randomString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(8)}`;
+    proxyString = `cc-${country.toUpperCase()}-city-${city}-sessid-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(8)}`;
+    if (city) {
+      proxyString = `cc-${country.toUpperCase()}-st-${state}-city-${city}-sessid-${randomString(8)}`;
+    } else {
+      proxyString = `cc-${country.toUpperCase()}-st-${state}-sessid-${randomString(8)}`;
+    }
   }
 
   if (sessionDuration) {
     proxyString += `-sesstime-${sessionDuration}`;
   } else {
-    proxyString += ``;
+    proxyString += `-sesstime-60`;
+  }
+
+  if (deviceType) {
+    proxyString += `-platform-${deviceType}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -109,6 +118,7 @@ export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
     state,
     proxyFormat,
     authType,
+    deviceType,
   } = input;
   const proxyPort = port ?? DEFAULT_ELITE_PORT;
   const proxyEuPort = euPort ?? DEFAULT_ELITE_EU_PORT;
@@ -139,14 +149,22 @@ export const generateOxylabsRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}`;
+  let proxyString = `cc-${country.toUpperCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}`;
+    proxyString = `cc-${country.toUpperCase()}-city-${city}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}`;
+    if (city) {
+      proxyString = `cc-${country.toUpperCase()}-st-${state}-city-${city}`;
+    } else {
+      proxyString = `cc-${country.toUpperCase()}-st-${state}`;
+    }
+  }
+
+  if (deviceType) {
+    proxyString += `-platform-${deviceType}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;

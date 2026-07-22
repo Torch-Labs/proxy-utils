@@ -29,8 +29,6 @@ describe('Proxy Generation Utils', () => {
         stickyGenerationFn: generatePacketstreamStickyProxies,
       });
 
-      console.log(result);
-
       expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-sticky-country-us-session-']);
     });
 

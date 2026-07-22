@@ -63,20 +63,20 @@ export const generateSmartStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}-session-${randomString(8)}`;
+  let proxyString = `cc-${country.toLowerCase()}-sessid-${randomString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(8)}`;
+    proxyString = `cc-${country.toLowerCase()}-city-${city}-sessid-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(8)}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}-sessid-${randomString(8)}`;
   }
 
   if (sessionDuration) {
     proxyString += `-sesstime-${sessionDuration}`;
   } else {
-    proxyString += ``;
+    proxyString += `-sesstime-60`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -139,14 +139,14 @@ export const generateSmartRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}`;
+  let proxyString = `cc-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}-city-${city}`;
+    proxyString = `cc-${country.toLowerCase()}-city-${city}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}-state-${state}`;
+    proxyString = `cc-${country.toLowerCase()}-state-${state}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
