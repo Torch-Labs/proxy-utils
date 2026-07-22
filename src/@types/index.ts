@@ -17,6 +17,7 @@ export type DefualtProxyConfig = {
   state?: string;
   city?: string;
   deviceType?: string;
+  isUDP?: boolean;
   sessionDuration?: number;
   ssl?: boolean;
   streaming?: boolean;
@@ -79,5 +80,6 @@ export enum AuthType {
   HTTP = 'HTTP',
   HTTPS = 'HTTPS',
   SOCKS5 = 'SOCKS5',
+  UDP = 'UDP',
   'HTTP/HTTPS' = 'HTTP/HTTPS',
 }
