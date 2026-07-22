@@ -17,6 +17,7 @@ export type DefualtProxyConfig = {
   state?: string;
   city?: string;
   deviceType?: string;
+  isUDP?: boolean;
   sessionDuration?: number;
   ssl?: boolean;
   streaming?: boolean;
