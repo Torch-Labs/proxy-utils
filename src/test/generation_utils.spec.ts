@@ -29,7 +29,7 @@ describe('Proxy Generation Utils', () => {
         stickyGenerationFn: generatePacketstreamStickyProxies,
       });
 
-      expectStickyProxy(result, ['host.domain', '1234', 'username', 'password-sticky-country-us-session-']);
+      expectStickyProxy(result as string, ['host.domain', '1234', 'username', 'password-sticky-country-us-session-']);
     });
 
     it('should generate a rotating proxy', () => {

@@ -64,6 +64,7 @@ export const ProxyGenerationPlansConstant = {
   IPROYAL: 'IPROYAL',
   GEONODE: 'GEONODE',
   PLANX: 'PLANX',
+  MIXEDFAFO: 'MIXEDFAFO',
   NETNUT: 'NETNUT',
   TL_GEO_V2: 'TL_GEO_V2',
 } as const;

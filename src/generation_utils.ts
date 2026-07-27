@@ -1,6 +1,6 @@
 import { ProxyConfig, ProxyGenerationConfig, ProxyGenerationTypes, ProxyGenerationTypesConstant } from './@types';
 
-type ProxyGenerationFunction = (input: ProxyConfig) => string;
+type ProxyGenerationFunction = (input: ProxyConfig) => string | string[];
 
 type ProxyGenerationFunctions = {
   stickyGenerationFn: ProxyGenerationFunction;
@@ -81,7 +81,11 @@ export const generateProxies = (
         type,
         generationFns,
       );
-      generatedProxyList.push(proxy);
+      if (Array.isArray(proxy)) {
+        generatedProxyList.push(...proxy);
+      } else {
+        generatedProxyList.push(proxy);
+      }
     });
   }
 
@@ -95,7 +99,11 @@ export const generateProxies = (
         type,
         generationFns,
       );
-      generatedProxyList.push(proxy);
+      if (Array.isArray(proxy)) {
+        generatedProxyList.push(...proxy);
+      } else {
+        generatedProxyList.push(proxy);
+      }
     }
   }
 
