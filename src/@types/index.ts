@@ -31,6 +31,7 @@ export type DefualtProxyConfig = {
   socksStickyPort?: number;
   socksRotatingPort?: number;
   poolConfig?: PoolConfig[];
+  providerConfig?: ProxyProviderCofig;
 };
 
 export type PoolConfig = {
@@ -39,6 +40,8 @@ export type PoolConfig = {
   port: number;
   domain: string;
 };
+
+export type ProxyProviderCofig = 'iproyal_fafomix' | 'brightdata';
 
 export type ProxyConfig = DefualtProxyConfig & {
   country: string;

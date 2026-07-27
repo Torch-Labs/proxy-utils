@@ -1,6 +1,6 @@
 import { ProxyConfig, ProxyGenerationConfig, ProxyGenerationTypes, ProxyGenerationTypesConstant } from './@types';
 
-type ProxyGenerationFunction = (input: ProxyConfig) => string | string[];
+type ProxyGenerationFunction = (input: ProxyConfig) => string;
 
 type ProxyGenerationFunctions = {
   stickyGenerationFn: ProxyGenerationFunction;
@@ -65,6 +65,7 @@ export const generateProxies = (
     socksStickyPort: config.socksStickyPort,
     socksRotatingPort: config.socksRotatingPort,
     poolConfig: config.poolConfig,
+    providerConfig: config.providerConfig,
     deviceType: config.deviceType,
     isUDP: config.isUDP,
   };
@@ -81,11 +82,7 @@ export const generateProxies = (
         type,
         generationFns,
       );
-      if (Array.isArray(proxy)) {
-        generatedProxyList.push(...proxy);
-      } else {
-        generatedProxyList.push(proxy);
-      }
+      generatedProxyList.push(proxy);
     });
   }
 
@@ -99,11 +96,7 @@ export const generateProxies = (
         type,
         generationFns,
       );
-      if (Array.isArray(proxy)) {
-        generatedProxyList.push(...proxy);
-      } else {
-        generatedProxyList.push(proxy);
-      }
+      generatedProxyList.push(proxy);
     }
   }
 

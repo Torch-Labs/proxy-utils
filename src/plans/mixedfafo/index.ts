@@ -2,17 +2,6 @@ import { ProxyConfig } from '../../@types';
 import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
-const zipHostsAndPorts = (host: string | undefined, port: number | string | undefined) => {
-  const hosts = String(host ?? '')
-    .split(',')
-    .map((h) => h.trim());
-  const ports = String(port ?? '')
-    .split(',')
-    .map((p) => p.trim());
-
-  return hosts.map((h, index) => ({ host: h, port: ports[index] ?? ports[0] }));
-};
-
 const buildBrdStickyProxyString = ({
   country,
   city,
@@ -201,6 +190,7 @@ export const generateMixedfafoStickyProxies = (input: ProxyConfig) => {
     staticIps,
     pawn,
     deviceType,
+    providerConfig,
   } = input;
 
   //
@@ -234,35 +224,31 @@ export const generateMixedfafoStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  const hostAndPortPairs = zipHostsAndPorts(formattedHostAndConfig.host, formattedHostAndConfig.port);
+  const proxyString =
+    providerConfig === 'brightdata'
+      ? buildBrdStickyProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          deviceType,
+        })
+      : buildIproyalStickyProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          deviceType,
+          sessionDuration,
+          streaming,
+          staticIps,
+          pawn,
+        });
 
-  return hostAndPortPairs.map(({ host: pairHost, port: pairPort }, index) => {
-    const proxyString =
-      index > 0
-        ? buildBrdStickyProxyString({
-            country,
-            city: city?.toLowerCase(),
-            state: state?.toLowerCase(),
-            deviceType,
-          })
-        : buildIproyalStickyProxyString({
-            country,
-            city: city?.toLowerCase(),
-            state: state?.toLowerCase(),
-            deviceType,
-            sessionDuration,
-            streaming,
-            staticIps,
-            pawn,
-          });
+  const part1 = `${formattedHostAndConfig.host}.${domain}`;
+  const part2 = `${formattedHostAndConfig.port}`;
+  const part3 = `${username}`;
+  const part4 = `${password}-${proxyString}`;
 
-    const part1 = `${pairHost}.${domain}`;
-    const part2 = `${pairPort}`;
-    const part3 = `${username}`;
-    const part4 = `${password}-${proxyString}`;
-
-    return formatProxyString({ part1, part2, part3, part4, proxyFormat });
-  });
+  return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
 
 export const generateMixedfafoRotatingProxies = (input: ProxyConfig) => {
@@ -291,6 +277,7 @@ export const generateMixedfafoRotatingProxies = (input: ProxyConfig) => {
     staticIps,
     pawn,
     deviceType,
+    providerConfig,
   } = input;
 
   const proxyPort = port ?? DEFAULT_MIXEDFAFO_PORT;
@@ -322,32 +309,28 @@ export const generateMixedfafoRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  const hostAndPortPairs = zipHostsAndPorts(formattedHostAndConfig.host, formattedHostAndConfig.port);
+  const proxyString =
+    providerConfig === 'brightdata'
+      ? buildBrdRotatingProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          deviceType,
+        })
+      : buildIproyalRotatingProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          deviceType,
+          streaming,
+          staticIps,
+          pawn,
+        });
 
-  return hostAndPortPairs.map(({ host: pairHost, port: pairPort }, index) => {
-    const proxyString =
-      index > 0
-        ? buildBrdRotatingProxyString({
-            country,
-            city: city?.toLowerCase(),
-            state: state?.toLowerCase(),
-            deviceType,
-          })
-        : buildIproyalRotatingProxyString({
-            country,
-            city: city?.toLowerCase(),
-            state: state?.toLowerCase(),
-            deviceType,
-            streaming,
-            staticIps,
-            pawn,
-          });
+  const part1 = `${formattedHostAndConfig.host}.${domain}`;
+  const part2 = `${formattedHostAndConfig.port}`;
+  const part3 = `${username}`;
+  const part4 = `${password}-${proxyString}`;
 
-    const part1 = `${pairHost}.${domain}`;
-    const part2 = `${pairPort}`;
-    const part3 = `${username}`;
-    const part4 = `${password}-${proxyString}`;
-
-    return formatProxyString({ part1, part2, part3, part4, proxyFormat });
-  });
+  return formatProxyString({ part1, part2, part3, part4, proxyFormat });
 };
