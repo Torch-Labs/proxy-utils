@@ -15,6 +15,7 @@ import { generatePrivateRotatingProxies, generatePrivateStickyProxies } from './
 import { generateSmartRotatingProxies, generateSmartStickyProxies } from './plans/smart';
 import { generateNetnutRotatingProxies, generateNetnutStickyProxies } from './plans/netnut';
 import { generateTlGeoV2RotatingProxies, generateTlGeoV2StickyProxies } from './plans/tl_geo_v2';
+import { generateMixedfafoRotatingProxies, generateMixedfafoStickyProxies } from './plans/mixedfafo';
 
 export const generateProxiesForPlan = (
   config: ProxyGenerationConfig,
@@ -72,6 +73,11 @@ export const generateProxiesForPlan = (
       return generateProxies(config, amount, type, {
         rotatingGenerationFn: generateTlGeoV2RotatingProxies,
         stickyGenerationFn: generateTlGeoV2StickyProxies,
+      });
+    case ProxyGenerationPlansConstant.MIXEDFAFO:
+      return generateProxies(config, amount, type, {
+        rotatingGenerationFn: generateMixedfafoRotatingProxies,
+        stickyGenerationFn: generateMixedfafoStickyProxies,
       });
     default:
       throw new Error('Not implemented');

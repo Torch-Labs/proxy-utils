@@ -65,6 +65,7 @@ export const generateProxies = (
     socksStickyPort: config.socksStickyPort,
     socksRotatingPort: config.socksRotatingPort,
     poolConfig: config.poolConfig,
+    providerConfig: config.providerConfig,
     deviceType: config.deviceType,
     isUDP: config.isUDP,
   };
