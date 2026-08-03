@@ -441,7 +441,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -455,7 +455,7 @@ describe('Proxy Generation', () => {
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          sessionDuration: 20,
+          sessionDuration: 30,
           proxyFormat: ProxyFormat.DEFAULT,
         },
         10,
@@ -464,7 +464,7 @@ describe('Proxy Generation', () => {
       );
 
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_session-.{8}_lifetime-30m/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -486,7 +486,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york');
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us_city-new_york');
       });
     });
 
@@ -507,7 +507,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_city-new_york_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -522,7 +522,7 @@ describe('Proxy Generation', () => {
           host: 'testhost',
           username: 'testuser',
           port: 1234,
-          sessionDuration: 20,
+          sessionDuration: 30,
           proxyFormat: ProxyFormat.DEFAULT,
         },
         10,
@@ -530,7 +530,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-city-new_york-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_city-new_york_session-.{8}_lifetime-30m/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -552,7 +552,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us-state-us_california');
+        expect(proxy).toEqual('testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california');
       });
     });
 
@@ -573,7 +573,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us-state-us_california-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -624,7 +624,7 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-(us|ca|mx)-session-.{8}/g;
+        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-(us|ca|mx)_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });

@@ -8,7 +8,7 @@ const expectStickyProxy = (proxy: string, expected: string[]) => {
   expect(splitResult[1]).toEqual(expected[1]);
   expect(splitResult[2]).toEqual(expected[2]);
   expect(splitResult[3]).toContain(expected[3]);
-  expect(splitResult[3].length).toEqual(34);
+  expect(splitResult[3].length).toEqual(46);
 };
 
 describe('Generate Smart Proxies', () => {
@@ -27,7 +27,7 @@ describe('Generate Smart Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-country-us-session']);
+      expectStickyProxy(proxy, ['testhost.test', '1234', 'testuname', 'testpw-country-us_session']);
     });
 
     it('should generate a sticky proxy for country belongs to eu region', () => {
@@ -37,7 +37,7 @@ describe('Generate Smart Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhosteu.test', '7002', 'testuname', 'testpw-country-gr-session']);
+      expectStickyProxy(proxy, ['testhosteu.test', '7002', 'testuname', 'testpw-country-gr_session']);
     });
   });
 
