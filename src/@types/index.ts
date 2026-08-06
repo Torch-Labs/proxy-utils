@@ -16,6 +16,7 @@ export type DefualtProxyConfig = {
   socksAsiaPort?: number;
   state?: string;
   city?: string;
+  asn?: string;
   deviceType?: string;
   isUDP?: boolean;
   sessionDuration?: number;
@@ -70,6 +71,7 @@ export const ProxyGenerationPlansConstant = {
   MIXEDFAFO: 'MIXEDFAFO',
   NETNUT: 'NETNUT',
   TL_GEO_V2: 'TL_GEO_V2',
+  MOBILE: 'MOBILE',
 } as const;
 
 export type ProxyGenerationPlans = typeof ProxyGenerationPlansConstant[keyof typeof ProxyGenerationPlansConstant];
