@@ -30,7 +30,7 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '61114', 'testuname', 'testpw-country-us_session'], 46);
+      expectStickyProxy(proxy, ['testhost.test', '61114', 'testuname', 'testpw-country-us-session'], 46);
     });
 
     it('should generate a sticky proxy in iproyal format for a country belonging to the eu region', () => {
@@ -41,7 +41,7 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhosteu.test', '61115', 'testuname', 'testpw-country-gr_session'], 46);
+      expectStickyProxy(proxy, ['testhosteu.test', '61115', 'testuname', 'testpw-country-gr-session'], 46);
     });
 
     it('should fall back to the default mixedfafo eu/asia hosts when none are provided', () => {
@@ -56,8 +56,8 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(euProxy, ['mixedfofaeu.test', '61115', 'testuname', 'testpw-country-gr_session'], 46);
-      expectStickyProxy(asiaProxy, ['mixedfofaasia.test', '61116', 'testuname', 'testpw-country-jp_session'], 46);
+      expectStickyProxy(euProxy, ['mixedfofaeu.test', '61115', 'testuname', 'testpw-country-gr-session'], 46);
+      expectStickyProxy(asiaProxy, ['mixedfofaasia.test', '61116', 'testuname', 'testpw-country-jp-session'], 46);
     });
 
     it('should generate a socks sticky proxy in iproyal format', () => {
@@ -70,7 +70,7 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['sockstesthost.test', '61114', 'testuname', 'testpw-country-us_session'], 46);
+      expectStickyProxy(proxy, ['sockstesthost.test', '61114', 'testuname', 'testpw-country-us-session'], 46);
     });
 
     it('should apply city, sessionDuration and deviceType in iproyal format', () => {
@@ -83,9 +83,9 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expectStickyProxy(proxy, ['testhost.test', '61114', 'testuname', 'testpw-country-us_state-ny_session'], 70);
-      expect(proxy).toContain('_lifetime-30m');
-      expect(proxy).toContain('_device-mobile');
+      expectStickyProxy(proxy, ['testhost.test', '61114', 'testuname', 'testpw-country-us-state-ny-session'], 70);
+      expect(proxy).toContain('-lifetime-30m');
+      expect(proxy).toContain('-device-mobile');
     });
 
     it('should apply streaming, staticIps and pawn flags in iproyal format', () => {
@@ -98,9 +98,9 @@ describe('Generate Mixedfafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toContain('_streaming-1');
-      expect(proxy).toContain('_skipispstatic-1');
-      expect(proxy).toContain('_direct-1');
+      expect(proxy).toContain('-streaming-1');
+      expect(proxy).toContain('-skipispstatic-1');
+      expect(proxy).toContain('-direct-1');
     });
 
     it('should generate a sticky proxy in brightdata format when providerConfig is brightdata', () => {
@@ -227,7 +227,7 @@ describe('Generate Mixedfafo Proxies', () => {
       });
 
       expect(proxy).toEqual(
-        'testhost.test:61114:testuname:testpw-country-us_state-ny_streaming-1_skipispstatic-1_direct-1_device-mobile',
+        'testhost.test:61114:testuname:testpw-country-us-state-ny-streaming-1-skipispstatic-1-direct-1-device-mobile',
       );
     });
 

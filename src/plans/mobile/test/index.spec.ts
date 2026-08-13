@@ -17,7 +17,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      const re = /^testhost\.test:41112:testuname:testpw-country-us_session-[a-z0-9]{8}_lifetime-1h$/;
+      const re = /^testhost\.test:41112:testuname:testpw-country-us-session-[a-z0-9]{8}-lifetime-1h$/;
       expect(re.test(proxy)).toBeTruthy();
     });
 
@@ -28,7 +28,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      const re = /^testhosteu\.test:41113:testuname:testpw-country-de_session-[a-z0-9]{8}_lifetime-1h$/;
+      const re = /^testhosteu\.test:41113:testuname:testpw-country-de-session-[a-z0-9]{8}-lifetime-1h$/;
       expect(re.test(proxy)).toBeTruthy();
     });
 
@@ -50,7 +50,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      const re = /^testhostasia\.test:41114:testuname:testpw-country-jp_session-[a-z0-9]{8}_lifetime-1h$/;
+      const re = /^testhostasia\.test:41114:testuname:testpw-country-jp-session-[a-z0-9]{8}-lifetime-1h$/;
       expect(re.test(proxy)).toBeTruthy();
     });
 
@@ -62,7 +62,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      const re = /^testhost\.test:41112:testuname:testpw-country-us_city-newyork_session-[a-z0-9]{8}_lifetime-1h$/;
+      const re = /^testhost\.test:41112:testuname:testpw-country-us-city-newyork-session-[a-z0-9]{8}-lifetime-1h$/;
       expect(re.test(proxy)).toBeTruthy();
     });
 
@@ -73,7 +73,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy.endsWith('_lifetime-1h')).toBeTruthy();
+      expect(proxy.endsWith('-lifetime-1h')).toBeTruthy();
     });
 
     it('should use a minute-based lifetime when sessionDuration is below 60', () => {
@@ -84,7 +84,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy.endsWith('_lifetime-30m')).toBeTruthy();
+      expect(proxy.endsWith('-lifetime-30m')).toBeTruthy();
     });
 
     it('should use a floored hour-based lifetime when sessionDuration is 60 or above', () => {
@@ -95,10 +95,10 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy.endsWith('_lifetime-2h')).toBeTruthy();
+      expect(proxy.endsWith('-lifetime-2h')).toBeTruthy();
     });
 
-    it('should append an isp segment when asn is provided', () => {
+    it('should append an isp segment before the lifetime when asn is provided', () => {
       const proxy = generateMOBILEStickyProxies({
         ...commonConfig,
         country: 'US',
@@ -106,7 +106,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy.endsWith('_lifetime-1h_isp-AS1234')).toBeTruthy();
+      expect(proxy.endsWith('-isp-AS1234-lifetime-1h')).toBeTruthy();
     });
 
     it('should route to socksHost/socksPort for SOCKS5 auth on a default-region country', () => {
@@ -163,7 +163,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_1,
       });
 
-      const re = /^testuname:testpw-country-us_session-[a-z0-9]{8}_lifetime-1h:testhost\.test:41112$/;
+      const re = /^testuname:testpw-country-us-session-[a-z0-9]{8}-lifetime-1h:testhost\.test:41112$/;
       expect(re.test(proxy)).toBeTruthy();
     });
 
@@ -174,7 +174,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.FORMAT_2,
       });
 
-      const re = /^testuname:testpw-country-us_session-[a-z0-9]{8}_lifetime-1h@testhost\.test:41112$/;
+      const re = /^testuname:testpw-country-us-session-[a-z0-9]{8}-lifetime-1h@testhost\.test:41112$/;
       expect(re.test(proxy)).toBeTruthy();
     });
   });
@@ -218,7 +218,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us_city-newyork');
+      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us-city-newyork');
     });
 
     it('should append an isp segment when asn is provided', () => {
@@ -229,7 +229,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us_isp-AS1234');
+      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us-isp-AS1234');
     });
 
     it('should combine city and asn in the proxy string', () => {
@@ -241,7 +241,7 @@ describe('Generate MOBILE Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us_city-newyork_isp-AS1234');
+      expect(proxy).toEqual('testhost.test:41112:testuname:testpw-country-us-city-newyork-isp-AS1234');
     });
 
     it('should route to socksHost/socksPort for SOCKS5 auth on a default-region country', () => {
