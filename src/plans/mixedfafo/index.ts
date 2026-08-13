@@ -77,37 +77,37 @@ const buildIproyalStickyProxyString = ({
   staticIps?: boolean;
   pawn?: boolean;
 }) => {
-  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}-session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(8)}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}-state-${state}-session-${randomString(8)}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+      proxyString += `-lifetime-${Math.floor(sessionDuration / 60)}h`;
     } else {
-      proxyString += `_lifetime-${sessionDuration}m`;
+      proxyString += `-lifetime-${sessionDuration}m`;
     }
   } else {
-    proxyString += `_lifetime-1h`;
+    proxyString += `-lifetime-1h`;
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += `-streaming-1`;
   }
   if (staticIps) {
-    proxyString += `_skipispstatic-1`;
+    proxyString += `-skipispstatic-1`;
   }
   if (pawn) {
-    proxyString += `_direct-1`;
+    proxyString += `-direct-1`;
   }
   if (deviceType) {
-    proxyString += `_device-${deviceType}`;
+    proxyString += `-device-${deviceType}`;
   }
 
   return proxyString;
@@ -133,24 +133,24 @@ const buildIproyalRotatingProxyString = ({
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}`;
   }
 
   if (state) {
-    proxyString = `country-${country.toLowerCase()}_state-${state}`;
+    proxyString = `country-${country.toLowerCase()}-state-${state}`;
   }
 
   if (streaming) {
-    proxyString += `_streaming-1`;
+    proxyString += `-streaming-1`;
   }
   if (staticIps) {
-    proxyString += `_skipispstatic-1`;
+    proxyString += `-skipispstatic-1`;
   }
   if (pawn) {
-    proxyString += `_direct-1`;
+    proxyString += `-direct-1`;
   }
   if (deviceType) {
-    proxyString += `_device-${deviceType}`;
+    proxyString += `-device-${deviceType}`;
   }
 
   return proxyString;

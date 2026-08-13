@@ -17,6 +17,7 @@ export type DefualtProxyConfig = {
   state?: string;
   city?: string;
   asn?: string;
+  poolMode?: string;
   deviceType?: string;
   isUDP?: boolean;
   sessionDuration?: number;
