@@ -63,24 +63,24 @@ export const generateMOBILEStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
+  let proxyString = `country-${country.toLowerCase()}-session-${randomString(8)}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}-session-${randomString(8)}`;
+  }
+
+  if (asn) {
+    proxyString += `-isp-${asn}`;
   }
 
   if (sessionDuration) {
     if (sessionDuration >= 60) {
-      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+      proxyString += `-lifetime-${Math.floor(sessionDuration / 60)}h`;
     } else {
-      proxyString += `_lifetime-${sessionDuration}m`;
+      proxyString += `-lifetime-${sessionDuration}m`;
     }
   } else {
-    proxyString += `_lifetime-1h`;
-  }
-
-  if (asn) {
-    proxyString += `_isp-${asn}`;
+    proxyString += `-lifetime-1h`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
@@ -146,11 +146,11 @@ export const generateMOBILERotatingProxies = (input: ProxyConfig) => {
   let proxyString = `country-${country.toLowerCase()}`;
 
   if (city) {
-    proxyString = `country-${country.toLowerCase()}_city-${city}`;
+    proxyString = `country-${country.toLowerCase()}-city-${city}`;
   }
 
   if (asn) {
-    proxyString += `_isp-${asn}`;
+    proxyString += `-isp-${asn}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;

@@ -69,6 +69,7 @@ export const generateProxies = (
     deviceType: config.deviceType,
     isUDP: config.isUDP,
     asn: config.asn,
+    poolMode: config.poolMode,
   };
 
   for (let i = 0; i < proxyAmount; i++) {

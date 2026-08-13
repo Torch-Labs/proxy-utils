@@ -19,6 +19,7 @@ export const generateGeonodeStickyProxies = (input: ProxyConfig) => {
     socksRotatingPort,
     authType,
     isUDP,
+    poolMode,
   } = input;
 
   const proxyPort = formatPort({
@@ -42,14 +43,18 @@ export const generateGeonodeStickyProxies = (input: ProxyConfig) => {
 
   proxyString = `${proxyString}-session-${randomString(8)}`;
 
+  if (isUDP) {
+    proxyString += `-requireUdp-true`;
+  }
+
+  if (poolMode) {
+    proxyString += `-poolmode-fast`;
+  }
+
   if (sessionDuration) {
     proxyString += `-lifetime-${sessionDuration}`;
   } else {
     proxyString += `-lifetime-60`;
-  }
-
-  if (isUDP) {
-    proxyString += `-requireUdp-true`;
   }
 
   const part1 = `${host}.${domain}`;
