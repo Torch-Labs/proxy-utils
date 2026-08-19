@@ -1,5 +1,5 @@
 import { generateProxiesForPlan } from '..';
-import { ProxyFormat, ProxyGenerationPlansConstant, ProxyGenerationTypesConstant } from '../@types';
+import { AuthType, ProxyFormat, ProxyGenerationPlansConstant, ProxyGenerationTypesConstant } from '../@types';
 
 describe('Proxy Generation', () => {
   describe('Packetstream', () => {
@@ -573,7 +573,8 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california_session-.{8}_lifetime-1h/g;
+        const re =
+          /testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
@@ -1171,6 +1172,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
@@ -1191,6 +1193,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
@@ -1212,6 +1215,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
@@ -1232,6 +1236,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
@@ -1253,6 +1258,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         11,
         ProxyGenerationTypesConstant.ROTATING,
