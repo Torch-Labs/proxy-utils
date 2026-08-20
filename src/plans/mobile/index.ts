@@ -32,6 +32,7 @@ export const generateMOBILEStickyProxies = (input: ProxyConfig) => {
     socksEuPort,
     socksAsiaPort,
     authType,
+    deviceType,
   } = input;
 
   const proxyPort = port ?? DEFAULT_MOBILE_PORT;
@@ -71,6 +72,10 @@ export const generateMOBILEStickyProxies = (input: ProxyConfig) => {
 
   if (asn) {
     proxyString += `-isp-${asn}`;
+  }
+
+  if (deviceType) {
+    proxyString += `-device-${deviceType}`;
   }
 
   if (sessionDuration) {
@@ -113,6 +118,7 @@ export const generateMOBILERotatingProxies = (input: ProxyConfig) => {
     socksEuPort,
     socksAsiaPort,
     authType,
+    deviceType,
   } = input;
   const proxyPort = port ?? DEFAULT_MOBILE_PORT;
   const proxyEuPort = euPort ?? DEFAULT_MOBILE_EU_PORT;
@@ -151,6 +157,10 @@ export const generateMOBILERotatingProxies = (input: ProxyConfig) => {
 
   if (asn) {
     proxyString += `-isp-${asn}`;
+  }
+
+  if (deviceType) {
+    proxyString += `-device-${deviceType}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
