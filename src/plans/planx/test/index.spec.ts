@@ -1,5 +1,5 @@
 import { generatePlanXRotatingProxies, generatePlanXStickyProxies } from '..';
-import { ProxyFormat } from '../../../@types';
+import { AuthType, ProxyFormat } from '../../../@types';
 
 const expectStickyProxy = (proxy: string, expected: string[]) => {
   const splitResult = proxy.split(':');
@@ -16,6 +16,7 @@ describe('Generate PlanX Proxies', () => {
     username: 'testuname',
     host: '',
     domain: '',
+    authType: AuthType.HTTP,
   };
 
   describe('generateStickyProxies()', () => {

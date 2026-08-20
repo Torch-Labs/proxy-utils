@@ -1,5 +1,5 @@
 import { generateProxiesForPlan } from '..';
-import { ProxyFormat, ProxyGenerationPlansConstant, ProxyGenerationTypesConstant } from '../@types';
+import { AuthType, ProxyFormat, ProxyGenerationPlansConstant, ProxyGenerationTypesConstant } from '../@types';
 
 describe('Proxy Generation', () => {
   describe('Packetstream', () => {
@@ -1172,6 +1172,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
@@ -1192,6 +1193,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
@@ -1213,6 +1215,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.ROTATING,
@@ -1233,6 +1236,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         10,
         ProxyGenerationTypesConstant.STICKY,
@@ -1254,6 +1258,7 @@ describe('Proxy Generation', () => {
           username: 'testuser',
           port: 12323,
           proxyFormat: ProxyFormat.DEFAULT,
+          authType: AuthType.HTTP,
         },
         11,
         ProxyGenerationTypesConstant.ROTATING,
