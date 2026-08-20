@@ -573,7 +573,8 @@ describe('Proxy Generation', () => {
         ProxyGenerationPlansConstant.SMART,
       );
       result.forEach((proxy) => {
-        const re = /testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california_session-.{8}_lifetime-1h/g;
+        const re =
+          /testhost.smartproxy.com:1234:testuser:testpw-country-us_state-us_california_session-.{8}_lifetime-1h/g;
         expect(re.test(proxy)).toBeTruthy();
       });
     });
