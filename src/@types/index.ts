@@ -41,6 +41,7 @@ export type PoolConfig = {
   host: string;
   port: number;
   domain: string;
+  authType: AuthType;
 };
 
 export type ProxyProviderCofig = 'iproyal_fafomix' | 'brightdata';

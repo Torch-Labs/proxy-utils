@@ -1,4 +1,4 @@
-import { ProxyConfig } from '../../@types';
+import { AuthType, ProxyConfig } from '../../@types';
 import { formatProxyString, randomString } from '../../utils';
 import { formatHostAndPort } from './utils';
 
@@ -16,9 +16,14 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
     staticIps,
     pawn,
     proxyFormat,
+    authType,
   } = input;
 
-  const { host, port, domain } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
+  const { host, port, domain } = formatHostAndPort({
+    countryCode: country,
+    poolConfig: poolConfig ?? [],
+    authType: authType as AuthType,
+  });
 
   let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
 
@@ -63,10 +68,26 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
-  const { country, poolConfig, username, password, city, state, deviceType, streaming, staticIps, pawn, proxyFormat } =
-    input;
+  const {
+    country,
+    poolConfig,
+    username,
+    password,
+    city,
+    state,
+    deviceType,
+    streaming,
+    staticIps,
+    pawn,
+    proxyFormat,
+    authType,
+  } = input;
 
-  const { host, port, domain, isCustom } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
+  const { host, port, domain, isCustom } = formatHostAndPort({
+    countryCode: country,
+    poolConfig: poolConfig ?? [],
+    authType: authType as AuthType,
+  });
 
   let proxyString = `country-${country.toLowerCase()}`;
 
