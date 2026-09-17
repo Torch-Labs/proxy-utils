@@ -69,6 +69,7 @@ export const generateProxies = (
     deviceType: config.deviceType,
     isUDP: config.isUDP,
     asn: config.asn,
+    filter: config.filter,
     poolMode: config.poolMode,
   };
 
