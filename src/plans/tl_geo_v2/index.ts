@@ -32,6 +32,8 @@ export const generateTlGeoV2StickyProxies = (input: ProxyConfig) => {
     socksEuPort,
     socksAsiaPort,
     authType,
+    filter,
+    poolMode,
     streaming,
   } = input;
 
@@ -79,6 +81,14 @@ export const generateTlGeoV2StickyProxies = (input: ProxyConfig) => {
     }
   }
 
+  if (filter) {
+    proxyString += `-type-${filter}`;
+  }
+
+  if (poolMode) {
+    proxyString += `-poolmode-fast`;
+  }
+
   if (sessionDuration) {
     proxyString += `-lifetime-${sessionDuration}`;
   } else {
@@ -115,6 +125,8 @@ export const generateTlGeoV2RotatingProxies = (input: ProxyConfig) => {
     state,
     proxyFormat,
     authType,
+    filter,
+    poolMode,
   } = input;
 
   const proxyPort = port ?? DEFAULT_TL_GEO_V2_PORT;
@@ -158,6 +170,14 @@ export const generateTlGeoV2RotatingProxies = (input: ProxyConfig) => {
     } else {
       proxyString = `country-${country.toLowerCase()}-state-${state.toLowerCase()}`;
     }
+  }
+
+  if (filter) {
+    proxyString += `-type-${filter}`;
+  }
+
+  if (poolMode) {
+    proxyString += `-poolmode-fast`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
