@@ -15,6 +15,7 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
     streaming,
     staticIps,
     pawn,
+    asn,
     proxyFormat,
   } = input;
 
@@ -54,6 +55,11 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
   if (deviceType) {
     proxyString += `_device-${deviceType}`;
   }
+
+  if (asn) {
+    proxyString += `_isp-${asn}`;
+  }
+
   const part1 = `${host}.${domain}`;
   const part2 = `${port}`;
   const part3 = `${username}`;
@@ -63,8 +69,20 @@ export const generatePlanXStickyProxies = (input: ProxyConfig) => {
 };
 
 export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
-  const { country, poolConfig, username, password, city, state, deviceType, streaming, staticIps, pawn, proxyFormat } =
-    input;
+  const {
+    country,
+    poolConfig,
+    username,
+    password,
+    city,
+    state,
+    deviceType,
+    streaming,
+    staticIps,
+    pawn,
+    asn,
+    proxyFormat,
+  } = input;
 
   const { host, port, domain, isCustom } = formatHostAndPort({ countryCode: country, poolConfig: poolConfig ?? [] });
 
@@ -91,6 +109,10 @@ export const generatePlanXRotatingProxies = (input: ProxyConfig) => {
 
   if (deviceType) {
     proxyString += `_device-${deviceType}`;
+  }
+
+  if (asn) {
+    proxyString += `_isp-${asn}`;
   }
 
   const part1 = `${host}.${domain}`;
