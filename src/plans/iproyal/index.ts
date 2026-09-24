@@ -36,6 +36,7 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     streaming,
     staticIps,
     pawn,
+    asn,
   } = input;
 
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
@@ -101,6 +102,10 @@ export const generateIPRoyalStickyProxies = (input: ProxyConfig) => {
     proxyString += `_device-${deviceType}`;
   }
 
+  if (asn) {
+    proxyString += `_isp-${asn}`;
+  }
+
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
   const part3 = `${username}`;
@@ -135,6 +140,7 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
     authType,
     staticIps,
     pawn,
+    asn,
   } = input;
   const proxyPort = port ?? DEFAULT_IPROYAL_PORT;
   const proxyEuPort = euPort ?? DEFAULT_IPROYAL_EU_PORT;
@@ -189,6 +195,10 @@ export const generateIPRoyalRotatingProxies = (input: ProxyConfig) => {
 
   if (deviceType) {
     proxyString += `_device-${deviceType}`;
+  }
+
+  if (asn) {
+    proxyString += `_isp-${asn}`;
   }
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
