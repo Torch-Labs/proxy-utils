@@ -71,6 +71,7 @@ export const ProxyGenerationPlansConstant = {
   GEONODE: 'GEONODE',
   PLANX: 'PLANX',
   MIXEDFAFO: 'MIXEDFAFO',
+  PRIVATEFAFO: 'PRIVATEFAFO',
   NETNUT: 'NETNUT',
   TL_GEO_V2: 'TL_GEO_V2',
   MOBILE: 'MOBILE',

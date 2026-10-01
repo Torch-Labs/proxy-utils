@@ -17,6 +17,7 @@ import { generateNetnutRotatingProxies, generateNetnutStickyProxies } from './pl
 import { generateTlGeoV2RotatingProxies, generateTlGeoV2StickyProxies } from './plans/tl_geo_v2';
 import { generateMixedfafoRotatingProxies, generateMixedfafoStickyProxies } from './plans/mixedfafo';
 import { generateMOBILERotatingProxies, generateMOBILEStickyProxies } from './plans/mobile';
+import { generatePrivatefafoRotatingProxies, generatePrivatefafoStickyProxies } from './plans/privatefafo';
 
 export const generateProxiesForPlan = (
   config: ProxyGenerationConfig,
@@ -74,6 +75,11 @@ export const generateProxiesForPlan = (
       return generateProxies(config, amount, type, {
         rotatingGenerationFn: generateTlGeoV2RotatingProxies,
         stickyGenerationFn: generateTlGeoV2StickyProxies,
+      });
+    case ProxyGenerationPlansConstant.PRIVATEFAFO:
+      return generateProxies(config, amount, type, {
+        rotatingGenerationFn: generatePrivatefafoRotatingProxies,
+        stickyGenerationFn: generatePrivatefafoStickyProxies,
       });
     case ProxyGenerationPlansConstant.MIXEDFAFO:
       return generateProxies(config, amount, type, {
