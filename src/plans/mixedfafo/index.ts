@@ -6,11 +6,13 @@ const buildBrdStickyProxyString = ({
   country,
   city,
   state,
+  asn,
   deviceType,
 }: {
   country: string;
   city?: string;
   state?: string;
+  asn?: string;
   deviceType?: string;
 }) => {
   let proxyString = `country-${country.toLowerCase()}-session-${randomString(15)}`;
@@ -27,6 +29,10 @@ const buildBrdStickyProxyString = ({
     proxyString += `-os-${deviceType}`;
   }
 
+  if (asn) {
+    proxyString += `-asn-${asn.replace(/^as/i, '')}`;
+  }
+
   return proxyString;
 };
 
@@ -34,11 +40,13 @@ const buildBrdRotatingProxyString = ({
   country,
   city,
   state,
+  asn,
   deviceType,
 }: {
   country: string;
   city?: string;
   state?: string;
+  asn?: string;
   deviceType?: string;
 }) => {
   let proxyString = `country-${country.toLowerCase()}`;
@@ -55,6 +63,10 @@ const buildBrdRotatingProxyString = ({
     proxyString += `-os-${deviceType}`;
   }
 
+  if (asn) {
+    proxyString += `-asn-${asn.replace(/^as/i, '')}`;
+  }
+
   return proxyString;
 };
 
@@ -62,6 +74,7 @@ const buildIproyalStickyProxyString = ({
   country,
   city,
   state,
+  asn,
   deviceType,
   sessionDuration,
   streaming,
@@ -71,6 +84,7 @@ const buildIproyalStickyProxyString = ({
   country: string;
   city?: string;
   state?: string;
+  asn?: string;
   deviceType?: string;
   sessionDuration?: number;
   streaming?: boolean;
@@ -109,6 +123,9 @@ const buildIproyalStickyProxyString = ({
   if (deviceType) {
     proxyString += `-device-${deviceType}`;
   }
+  if (asn) {
+    proxyString += `-isp-${asn}`;
+  }
 
   return proxyString;
 };
@@ -117,6 +134,7 @@ const buildIproyalRotatingProxyString = ({
   country,
   city,
   state,
+  asn,
   deviceType,
   streaming,
   staticIps,
@@ -125,6 +143,7 @@ const buildIproyalRotatingProxyString = ({
   country: string;
   city?: string;
   state?: string;
+  asn?: string;
   deviceType?: string;
   streaming?: boolean;
   staticIps?: boolean;
@@ -151,6 +170,9 @@ const buildIproyalRotatingProxyString = ({
   }
   if (deviceType) {
     proxyString += `-device-${deviceType}`;
+  }
+  if (asn) {
+    proxyString += `-isp-${asn}`;
   }
 
   return proxyString;
@@ -190,6 +212,7 @@ export const generateMixedfafoStickyProxies = (input: ProxyConfig) => {
     staticIps,
     pawn,
     deviceType,
+    asn,
     providerConfig,
   } = input;
 
@@ -230,12 +253,14 @@ export const generateMixedfafoStickyProxies = (input: ProxyConfig) => {
           country,
           city: city?.toLowerCase(),
           state: state?.toLowerCase(),
+          asn,
           deviceType,
         })
       : buildIproyalStickyProxyString({
           country,
           city: city?.toLowerCase(),
           state: state?.toLowerCase(),
+          asn,
           deviceType,
           sessionDuration,
           streaming,
@@ -277,6 +302,7 @@ export const generateMixedfafoRotatingProxies = (input: ProxyConfig) => {
     staticIps,
     pawn,
     deviceType,
+    asn,
     providerConfig,
   } = input;
 
@@ -315,12 +341,14 @@ export const generateMixedfafoRotatingProxies = (input: ProxyConfig) => {
           country,
           city: city?.toLowerCase(),
           state: state?.toLowerCase(),
+          asn,
           deviceType,
         })
       : buildIproyalRotatingProxyString({
           country,
           city: city?.toLowerCase(),
           state: state?.toLowerCase(),
+          asn,
           deviceType,
           streaming,
           staticIps,

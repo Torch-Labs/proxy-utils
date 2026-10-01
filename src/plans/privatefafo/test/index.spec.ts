@@ -242,6 +242,104 @@ describe('Generate Privatefafo Proxies', () => {
 
       expect(maskSessionId(proxy)).toEqual('testhost.test:61114:testuname:testpw-cc-US-sessid-<id>-sesstime-60');
     });
+
+    describe('with iproyal providerConfig', () => {
+      const maskIproyalSessionId = (proxy: string) => proxy.replace(/_session-[a-z0-9]{8}_/, '_session-<id>_');
+
+      it('should generate a sticky proxy in iproyal format with the default lifetime', () => {
+        const proxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskIproyalSessionId(proxy)).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_session-<id>_lifetime-1h',
+        );
+      });
+
+      it('should use the default privatefafo eu host', () => {
+        const proxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          country: 'GR',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskIproyalSessionId(proxy)).toEqual(
+          'privatefafoeu.test:61115:testuname:testpw-country-gr_session-<id>_lifetime-1h',
+        );
+      });
+
+      it('should apply state over city in lowercase', () => {
+        const proxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          state: 'NY',
+          city: 'Brooklyn',
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskIproyalSessionId(proxy)).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_state-ny_session-<id>_lifetime-1h',
+        );
+      });
+
+      it('should apply sessionDuration as minutes below an hour and hours otherwise', () => {
+        const minutesProxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          sessionDuration: 30,
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+        const hoursProxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          sessionDuration: 150,
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskIproyalSessionId(minutesProxy)).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_session-<id>_lifetime-30m',
+        );
+        expect(maskIproyalSessionId(hoursProxy)).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_session-<id>_lifetime-2h',
+        );
+      });
+
+      it('should apply streaming, staticIps, pawn, deviceType and asn', () => {
+        const proxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          streaming: true,
+          staticIps: true,
+          pawn: true,
+          deviceType: 'mobile',
+          asn: 'AS21928',
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskIproyalSessionId(proxy)).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_session-<id>_lifetime-1h_streaming-1_skipispstatic-1_direct-1_device-mobile_isp-AS21928',
+        );
+      });
+
+      it('should keep the current format when providerConfig is not iproyal', () => {
+        const proxy = generatePrivatefafoStickyProxies({
+          ...commonConfig,
+          providerConfig: 'brightdata',
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(maskSessionId(proxy)).toEqual('testhost.test:61114:testuname:testpw-cc-US-sessid-<id>-sesstime-60');
+      });
+    });
   });
 
   describe('generatePrivatefafoRotatingProxies()', () => {
@@ -405,6 +503,64 @@ describe('Generate Privatefafo Proxies', () => {
       });
 
       expect(proxy).toEqual('testhost.test:61114:testuname:testpw-cc-US');
+    });
+
+    describe('with iproyal providerConfig', () => {
+      it('should generate a rotating proxy in iproyal format', () => {
+        const proxy = generatePrivatefafoRotatingProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(proxy).toEqual('testhost.test:61114:testuname:testpw-country-us');
+      });
+
+      it('should generate a socks rotating proxy in iproyal format', () => {
+        const proxy = generatePrivatefafoRotatingProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          socksHost: 'sockstesthost',
+          socksPort: 61114,
+          authType: AuthType.SOCKS5,
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(proxy).toEqual('sockstesthost.test:61114:testuname:testpw-country-us');
+      });
+
+      it('should apply city in lowercase', () => {
+        const proxy = generatePrivatefafoRotatingProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          city: 'Munich',
+          country: 'DE',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(proxy).toEqual('privatefafoeu.test:61115:testuname:testpw-country-de_city-munich');
+      });
+
+      it('should apply streaming, staticIps, pawn, deviceType and asn without session params', () => {
+        const proxy = generatePrivatefafoRotatingProxies({
+          ...commonConfig,
+          providerConfig: 'iproyal_fafomix',
+          streaming: true,
+          staticIps: true,
+          pawn: true,
+          deviceType: 'mobile',
+          asn: 'AS21928',
+          sessionDuration: 30,
+          country: 'US',
+          proxyFormat: ProxyFormat.DEFAULT,
+        });
+
+        expect(proxy).toEqual(
+          'testhost.test:61114:testuname:testpw-country-us_streaming-1_skipispstatic-1_direct-1_device-mobile_isp-AS21928',
+        );
+      });
     });
   });
 });

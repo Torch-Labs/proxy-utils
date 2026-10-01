@@ -88,6 +88,114 @@ const buildRotatingProxyString = ({
   return proxyString;
 };
 
+const buildIproyalStickyProxyString = ({
+  country,
+  city,
+  state,
+  asn,
+  deviceType,
+  sessionDuration,
+  streaming,
+  staticIps,
+  pawn,
+}: {
+  country: string;
+  city?: string;
+  state?: string;
+  asn?: string;
+  deviceType?: string;
+  sessionDuration?: number;
+  streaming?: boolean;
+  staticIps?: boolean;
+  pawn?: boolean;
+}) => {
+  let proxyString = `country-${country.toLowerCase()}_session-${randomString(8)}`;
+
+  if (city) {
+    proxyString = `country-${country.toLowerCase()}_city-${city}_session-${randomString(8)}`;
+  }
+
+  if (state) {
+    proxyString = `country-${country.toLowerCase()}_state-${state}_session-${randomString(8)}`;
+  }
+
+  if (sessionDuration) {
+    if (sessionDuration >= 60) {
+      proxyString += `_lifetime-${Math.floor(sessionDuration / 60)}h`;
+    } else {
+      proxyString += `_lifetime-${sessionDuration}m`;
+    }
+  } else {
+    proxyString += `_lifetime-1h`;
+  }
+
+  if (streaming) {
+    proxyString += `_streaming-1`;
+  }
+  if (staticIps) {
+    proxyString += `_skipispstatic-1`;
+  }
+  if (pawn) {
+    proxyString += `_direct-1`;
+  }
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
+  }
+  if (asn) {
+    proxyString += `_isp-${asn}`;
+  }
+
+  return proxyString;
+};
+
+const buildIproyalRotatingProxyString = ({
+  country,
+  city,
+  state,
+  asn,
+  deviceType,
+  streaming,
+  staticIps,
+  pawn,
+}: {
+  country: string;
+  city?: string;
+  state?: string;
+  asn?: string;
+  deviceType?: string;
+  streaming?: boolean;
+  staticIps?: boolean;
+  pawn?: boolean;
+}) => {
+  let proxyString = `country-${country.toLowerCase()}`;
+
+  if (city) {
+    proxyString = `country-${country.toLowerCase()}_city-${city}`;
+  }
+
+  if (state) {
+    proxyString = `country-${country.toLowerCase()}_state-${state}`;
+  }
+
+  if (streaming) {
+    proxyString += `_streaming-1`;
+  }
+  if (staticIps) {
+    proxyString += `_skipispstatic-1`;
+  }
+  if (pawn) {
+    proxyString += `_direct-1`;
+  }
+  if (deviceType) {
+    proxyString += `_device-${deviceType}`;
+  }
+  if (asn) {
+    proxyString += `_isp-${asn}`;
+  }
+
+  return proxyString;
+};
+
 const DEFAULT_PRIVATEFAFO_PORT = 8501;
 const DEFAULT_PRIVATEFAFO_EU_PORT = 8502;
 const DEFAULT_PRIVATEFAFO_ASIA_PORT = 8503;
@@ -120,6 +228,10 @@ export const generatePrivatefafoStickyProxies = (input: ProxyConfig) => {
     authType,
     asn,
     deviceType,
+    streaming,
+    staticIps,
+    pawn,
+    providerConfig,
   } = input;
 
   //
@@ -153,14 +265,27 @@ export const generatePrivatefafoStickyProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  const proxyString = buildStickyProxyString({
-    country,
-    city,
-    state,
-    asn,
-    deviceType,
-    sessionDuration,
-  });
+  const proxyString =
+    providerConfig === 'iproyal_fafomix'
+      ? buildIproyalStickyProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          asn,
+          deviceType,
+          sessionDuration,
+          streaming,
+          staticIps,
+          pawn,
+        })
+      : buildStickyProxyString({
+          country,
+          city,
+          state,
+          asn,
+          deviceType,
+          sessionDuration,
+        });
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;
@@ -194,6 +319,10 @@ export const generatePrivatefafoRotatingProxies = (input: ProxyConfig) => {
     authType,
     asn,
     deviceType,
+    streaming,
+    staticIps,
+    pawn,
+    providerConfig,
   } = input;
 
   const proxyPort = port ?? DEFAULT_PRIVATEFAFO_PORT;
@@ -225,13 +354,25 @@ export const generatePrivatefafoRotatingProxies = (input: ProxyConfig) => {
     authType,
   });
 
-  const proxyString = buildRotatingProxyString({
-    country,
-    city,
-    state,
-    asn,
-    deviceType,
-  });
+  const proxyString =
+    providerConfig === 'iproyal_fafomix'
+      ? buildIproyalRotatingProxyString({
+          country,
+          city: city?.toLowerCase(),
+          state: state?.toLowerCase(),
+          asn,
+          deviceType,
+          streaming,
+          staticIps,
+          pawn,
+        })
+      : buildRotatingProxyString({
+          country,
+          city,
+          state,
+          asn,
+          deviceType,
+        });
 
   const part1 = `${formattedHostAndConfig.host}.${domain}`;
   const part2 = `${formattedHostAndConfig.port}`;

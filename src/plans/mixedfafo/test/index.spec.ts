@@ -103,6 +103,29 @@ describe('Generate Mixedfafo Proxies', () => {
       expect(proxy).toContain('-direct-1');
     });
 
+    it('should apply asn as isp in iproyal format', () => {
+      const proxy = generateMixedfafoStickyProxies({
+        ...commonConfig,
+        asn: 'AS21928',
+        country: 'US',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toMatch(/testpw-country-us-session-[a-z0-9]{8}-lifetime-1h-isp-AS21928$/);
+    });
+
+    it('should apply asn without the AS prefix in brightdata format', () => {
+      const proxy = generateMixedfafoStickyProxies({
+        ...commonConfig,
+        providerConfig: 'brightdata',
+        asn: 'AS21928',
+        country: 'US',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toMatch(/testpw-country-us-session-[a-z0-9]{15}-asn-21928$/);
+    });
+
     it('should generate a sticky proxy in brightdata format when providerConfig is brightdata', () => {
       const proxy = generateMixedfafoStickyProxies({
         ...commonConfig,
@@ -253,6 +276,31 @@ describe('Generate Mixedfafo Proxies', () => {
       });
 
       expect(proxy).toEqual('testhost.test:61114:testuname:testpw-country-us-state-ny-os-mobile');
+    });
+
+    it('should apply asn as isp in iproyal format', () => {
+      const proxy = generateMixedfafoRotatingProxies({
+        ...commonConfig,
+        deviceType: 'mobile',
+        asn: 'AS21928',
+        country: 'US',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toEqual('testhost.test:61114:testuname:testpw-country-us-device-mobile-isp-AS21928');
+    });
+
+    it('should apply asn without the AS prefix in brightdata format', () => {
+      const proxy = generateMixedfafoRotatingProxies({
+        ...commonConfig,
+        providerConfig: 'brightdata',
+        deviceType: 'mobile',
+        asn: 'AS21928',
+        country: 'US',
+        proxyFormat: ProxyFormat.DEFAULT,
+      });
+
+      expect(proxy).toEqual('testhost.test:61114:testuname:testpw-country-us-os-mobile-asn-21928');
     });
 
     it('should generate a socks rotating proxy in brightdata format', () => {
