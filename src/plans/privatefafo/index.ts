@@ -131,10 +131,10 @@ export const generatePrivatefafoStickyProxies = (input: ProxyConfig) => {
   const proxyEuSocksPort = socksEuPort ?? DEFAULT_PRIVATEFAFO_EU_SOCKS_PORT;
   const proxyAsiaSocksPort = socksAsiaPort ?? DEFAULT_PRIVATEFAFO_ASIA_SOCKS_PORT;
 
-  const proxyEuHost = euHost ? euHost : `privatefofaeu`;
-  const proxyAsiaHost = asiaHost ? asiaHost : `privatefofaasia`;
-  const proxySocksEuHost = socksEuHost ? socksEuHost : `privatefofaeu`;
-  const proxyAsiaSocksHost = socksAsiaHost ? socksAsiaHost : `privatefofaasia`;
+  const proxyEuHost = euHost ? euHost : `privatefafoeu`;
+  const proxyAsiaHost = asiaHost ? asiaHost : `privatefafoasia`;
+  const proxySocksEuHost = socksEuHost ? socksEuHost : `privatefafoeu`;
+  const proxyAsiaSocksHost = socksAsiaHost ? socksAsiaHost : `privatefafoasia`;
 
   const formattedHostAndConfig = formatHostAndPort({
     host: host,
@@ -203,10 +203,10 @@ export const generatePrivatefafoRotatingProxies = (input: ProxyConfig) => {
   const proxyEuSocksPort = socksEuPort ?? DEFAULT_PRIVATEFAFO_EU_SOCKS_PORT;
   const proxyAsiaSocksPort = socksAsiaPort ?? DEFAULT_PRIVATEFAFO_ASIA_SOCKS_PORT;
 
-  const proxyEuHost = euHost ? euHost : `privatefofaeu`;
-  const proxyAsiaHost = asiaHost ? asiaHost : `privatefofaasia`;
-  const proxySocksEuHost = socksEuHost ? socksEuHost : `privatefofaeu`;
-  const proxyAsiaSocksHost = socksAsiaHost ? socksAsiaHost : `privatefofaasia`;
+  const proxyEuHost = euHost ? euHost : `privatefafoeu`;
+  const proxyAsiaHost = asiaHost ? asiaHost : `privatefafoasia`;
+  const proxySocksEuHost = socksEuHost ? socksEuHost : `privatefafoeu`;
+  const proxyAsiaSocksHost = socksAsiaHost ? socksAsiaHost : `privatefafoasia`;
 
   const formattedHostAndConfig = formatHostAndPort({
     host: host,

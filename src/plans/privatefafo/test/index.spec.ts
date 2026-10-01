@@ -74,9 +74,9 @@ describe('Generate Privatefafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(maskSessionId(euProxy)).toEqual('PRIVATEfofaeu.test:61115:testuname:testpw-cc-GR-sessid-<id>-sesstime-60');
+      expect(maskSessionId(euProxy)).toEqual('privatefafoeu.test:61115:testuname:testpw-cc-GR-sessid-<id>-sesstime-60');
       expect(maskSessionId(asiaProxy)).toEqual(
-        'PRIVATEfofaasia.test:61116:testuname:testpw-cc-JP-sessid-<id>-sesstime-60',
+        'privatefafoasia.test:61116:testuname:testpw-cc-JP-sessid-<id>-sesstime-60',
       );
     });
 
@@ -100,7 +100,7 @@ describe('Generate Privatefafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(maskSessionId(proxy)).toEqual('PRIVATEfofaeu.test:61115:testuname:testpw-cc-GB-sessid-<id>-sesstime-60');
+      expect(maskSessionId(proxy)).toEqual('privatefafoeu.test:61115:testuname:testpw-cc-GB-sessid-<id>-sesstime-60');
     });
 
     it('should apply city in lowercase with spaces replaced by underscores', () => {
@@ -226,7 +226,7 @@ describe('Generate Privatefafo Proxies', () => {
       });
 
       expect(maskSessionId(proxy)).toEqual(
-        'PRIVATEfofaeu.test:61115:testuname:testpw-cc-DE-city-munich-platform-ios-sessid-<id>-sesstime-15',
+        'privatefafoeu.test:61115:testuname:testpw-cc-DE-city-munich-platform-ios-sessid-<id>-sesstime-15',
       );
     });
 
@@ -287,8 +287,8 @@ describe('Generate Privatefafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(euProxy).toEqual('PRIVATEfofaeu.test:61115:testuname:testpw-cc-GR');
-      expect(asiaProxy).toEqual('PRIVATEfofaasia.test:61116:testuname:testpw-cc-JP');
+      expect(euProxy).toEqual('privatefafoeu.test:61115:testuname:testpw-cc-GR');
+      expect(asiaProxy).toEqual('privatefafoasia.test:61116:testuname:testpw-cc-JP');
     });
 
     it('should generate a socks rotating proxy', () => {
@@ -311,7 +311,7 @@ describe('Generate Privatefafo Proxies', () => {
         proxyFormat: ProxyFormat.DEFAULT,
       });
 
-      expect(proxy).toEqual('PRIVATEfofaeu.test:61115:testuname:testpw-cc-GB');
+      expect(proxy).toEqual('privatefafoeu.test:61115:testuname:testpw-cc-GB');
     });
 
     it('should apply city in lowercase with spaces replaced by underscores', () => {
